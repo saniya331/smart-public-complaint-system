@@ -1,10 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
+
   return (
     <main className="auth-page">
       <section className="auth-info">
-        <h1>Civic<span>Voice</span></h1>
+        <h1>
+          Civic<span>Voice</span>
+        </h1>
+
         <div>
           <p className="tagline">WELCOME BACK</p>
           <h2>Every concern deserves a response.</h2>
@@ -14,7 +19,9 @@ function Login() {
 
       <section className="auth-form-section">
         <form className="auth-form">
-          <Link className="back-link" to="/">← Back to home</Link>
+          <Link className="back-link" to="/">
+            ← Back to home
+          </Link>
 
           <h2>Welcome back</h2>
           <p>Sign in to continue to your dashboard.</p>
@@ -30,15 +37,21 @@ function Login() {
               <input type="checkbox" />
               Remember me
             </label>
+
             <a href="#forgot">Forgot password?</a>
           </div>
 
-          <button type="button" className="primary-btn full-btn">
+          <button
+            type="button"
+            className="primary-btn full-btn"
+            onClick={() => navigate("/citizen/dashboard")}
+          >
             Sign in
           </button>
 
           <p className="switch-page">
-            New to CivicVoice? <Link to="/register">Create an account</Link>
+            New to CivicVoice?{" "}
+            <Link to="/register">Create an account</Link>
           </p>
         </form>
       </section>
