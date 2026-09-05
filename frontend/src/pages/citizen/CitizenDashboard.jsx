@@ -32,7 +32,9 @@ function CitizenDashboard() {
   return (
     <main className="dashboard-page">
       <aside className="sidebar">
-        <h2>Civic<span>Voice</span></h2>
+        <h2>
+          Civic<span>Voice</span>
+        </h2>
 
         <nav>
           <a className="active-menu" href="#dashboard">Dashboard</a>
@@ -52,7 +54,10 @@ function CitizenDashboard() {
             <span>Here is an overview of your civic complaints.</span>
           </div>
 
-          <Link className="primary-btn new-complaint-btn" to="#">
+          <Link
+            className="primary-btn new-complaint-btn"
+            to="/citizen/submit"
+          >
             + New Complaint
           </Link>
         </header>
@@ -102,7 +107,10 @@ function CitizenDashboard() {
           </div>
 
           {complaints.map((complaint) => (
-            <ComplaintCard key={complaint.id} complaint={complaint} />
+            <ComplaintCard
+              key={complaint.id}
+              complaint={complaint}
+            />
           ))}
         </section>
       </section>

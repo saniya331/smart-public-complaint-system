@@ -524,3 +524,140 @@ a.login-btn {
     display: none;
   }
 }
+
+.submit-page {
+  min-height: 100vh;
+  padding: 55px 12%;
+  background: #f8f8fc;
+}
+
+.submit-header {
+  margin-bottom: 28px;
+}
+
+.submit-header p {
+  color: #7557ca;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.submit-header h1 {
+  margin: 8px 0;
+  font-size: 32px;
+}
+
+.submit-header span {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.complaint-form {
+  max-width: 900px;
+  background: white;
+  border: 1px solid #eceaf2;
+  border-radius: 12px;
+}
+
+.form-section {
+  padding: 28px 32px;
+  border-bottom: 1px solid #eceaf2;
+}
+
+.form-section h2 {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.form-section h2 small {
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.form-section > p {
+  color: #718096;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+.form-section label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #374151;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.form-section input,
+.form-section select,
+.form-section textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d7d4df;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.form-section textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.upload-box {
+  min-height: 120px;
+  border: 2px dashed #cfc2ef;
+  border-radius: 9px;
+  background: #faf8ff;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.upload-box input {
+  display: none;
+}
+
+.upload-box strong {
+  color: #6040c4;
+}
+
+.upload-box span {
+  color: #7b8494;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 13px;
+  padding: 22px 32px;
+}
+
+@media (max-width: 600px) {
+  .submit-page {
+    padding: 35px 18px;
+  }
+
+  .form-section {
+    padding: 22px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-actions {
+    padding: 18px;
+  }
+}
