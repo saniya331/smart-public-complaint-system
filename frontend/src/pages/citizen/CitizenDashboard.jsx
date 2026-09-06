@@ -1,33 +1,17 @@
 import { Link } from "react-router-dom";
 import ComplaintCard from "../../components/ComplaintCard";
+import useComplaints from "../../hooks/useComplaints";
 
 function CitizenDashboard() {
-  const complaints = [
-    {
-      id: "GRV-2026-1048",
-      title: "Streetlight not working",
-      category: "Electricity",
-      location: "Miyapur, Hyderabad",
-      date: "20 Aug 2026",
-      status: "In Progress",
-    },
-    {
-      id: "GRV-2026-1042",
-      title: "Garbage collection delay",
-      category: "Sanitation",
-      location: "Gachibowli, Hyderabad",
-      date: "18 Aug 2026",
-      status: "Resolved",
-    },
-    {
-      id: "GRV-2026-1036",
-      title: "Pothole on main road",
-      category: "Roads",
-      location: "Kukatpally, Hyderabad",
-      date: "15 Aug 2026",
-      status: "Assigned",
-    },
-  ];
+  const { complaints } = useComplaints();
+
+  const inProgressCount = complaints.filter(
+    (complaint) => complaint.status === "In Progress"
+  ).length;
+
+  const resolvedCount = complaints.filter(
+    (complaint) => complaint.status === "Resolved"
+  ).length;
 
   return (
     <main className="dashboard-page">
@@ -37,21 +21,38 @@ function CitizenDashboard() {
         </h2>
 
         <nav>
-          <a className="active-menu" href="#dashboard">Dashboard</a>
-          <a href="#complaints">My Complaints</a>
-          <a href="#track">Track Complaint</a>
-          <a href="#notifications">Notifications</a>
+          <a className="active-menu" href="#dashboard">
+            Dashboard
+          </a>
+
+          <a href="#complaints">
+            My Complaints
+          </a>
+
+          <a href="#track">
+            Track Complaint
+          </a>
+
+          <a href="#notifications">
+            Notifications
+          </a>
         </nav>
 
-        <Link className="logout-link" to="/">← Sign out</Link>
+        <Link className="logout-link" to="/">
+          ← Sign out
+        </Link>
       </aside>
 
       <section className="dashboard-content">
         <header className="dashboard-header">
           <div>
             <p>Citizen Portal / Dashboard</p>
+
             <h1>Good morning, Saniya</h1>
-            <span>Here is an overview of your civic complaints.</span>
+
+            <span>
+              Here is an overview of your civic complaints.
+            </span>
           </div>
 
           <Link
@@ -65,30 +66,34 @@ function CitizenDashboard() {
         <section className="stat-grid">
           <div className="stat-card">
             <span>📋</span>
+
             <div>
               <p>Total Complaints</p>
-              <h2>3</h2>
+              <h2>{complaints.length}</h2>
             </div>
           </div>
 
           <div className="stat-card">
             <span>⏳</span>
+
             <div>
               <p>In Progress</p>
-              <h2>1</h2>
+              <h2>{inProgressCount}</h2>
             </div>
           </div>
 
           <div className="stat-card">
             <span>✓</span>
+
             <div>
               <p>Resolved</p>
-              <h2>1</h2>
+              <h2>{resolvedCount}</h2>
             </div>
           </div>
 
           <div className="stat-card">
             <span>🔔</span>
+
             <div>
               <p>New Updates</p>
               <h2>2</h2>
@@ -100,7 +105,10 @@ function CitizenDashboard() {
           <div className="section-heading">
             <div>
               <h2>Recent complaints</h2>
-              <p>Track the latest progress on your submitted issues.</p>
+
+              <p>
+                Track the latest progress on your submitted issues.
+              </p>
             </div>
 
             <button>View all</button>
