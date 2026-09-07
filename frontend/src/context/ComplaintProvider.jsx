@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ComplaintContext } from "./ComplaintContext";
 
 const initialComplaints = [
@@ -29,7 +29,17 @@ const initialComplaints = [
 ];
 
 function ComplaintProvider({ children }) {
-  const [complaints, setComplaints] = useState(initialComplaints);
+  const [complaints, setComplaints] = useState(() => {
+    const savedComplaints = localStorage.getItem("complaints");
+
+    return savedComplaints
+      ? JSON.parse(savedComplaints)
+      : initialComplaints;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("complaints", JSON.stringify(complaints));
+  }, [complaints]);
 
   function addComplaint(complaintData) {
     const newComplaint = {
