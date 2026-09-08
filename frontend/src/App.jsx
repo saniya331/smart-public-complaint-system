@@ -6,6 +6,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import CitizenDashboard from "./pages/citizen/CitizenDashboard";
 import SubmitComplaint from "./pages/citizen/SubmitComplaint";
+import MyComplaints from "./pages/citizen/MyComplaints";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
             path="/citizen/submit"
             element={<SubmitComplaint />}
           />
+          <Route
+  path="/citizen/complaints"
+  element={<MyComplaints />}
+/>
         </Routes>
       </BrowserRouter>
     </ComplaintProvider>

@@ -25,9 +25,9 @@ function CitizenDashboard() {
             Dashboard
           </a>
 
-          <a href="#complaints">
-            My Complaints
-          </a>
+          <Link to="/citizen/complaints">
+  My Complaints
+</Link>
 
           <a href="#track">
             Track Complaint
