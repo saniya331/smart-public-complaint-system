@@ -1,3 +1,7 @@
+/* =========================
+   GLOBAL
+========================= */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,6 +13,11 @@ body {
   background: #f8f7ff;
   color: #1f2937;
 }
+
+
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar {
   height: 75px;
@@ -62,6 +71,21 @@ button {
   border-radius: 7px;
   padding: 12px 20px;
 }
+
+a.register-btn {
+  color: white;
+  text-decoration: none;
+}
+
+a.login-btn {
+  color: #5b34c4;
+  text-decoration: none;
+}
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
   min-height: calc(100vh - 75px);
@@ -137,6 +161,11 @@ button {
   color: #16a36f;
   font-size: 14px;
 }
+
+
+/* =========================
+   AUTH PAGES
+========================= */
 
 .auth-page {
   min-height: 100vh;
@@ -250,39 +279,19 @@ button {
   text-decoration: none;
 }
 
-@media (max-width: 700px) {
-  .auth-page {
-    grid-template-columns: 1fr;
-  }
 
-  .auth-info {
-    min-height: 260px;
-  }
-
-  .auth-info h2 {
-    font-size: 34px;
-  }
-
-  .auth-form-section {
-    padding: 45px 0;
-  }
-}
-
-a.register-btn {
-  color: white;
-  text-decoration: none;
-}
-
-a.login-btn {
-  color: #5b34c4;
-  text-decoration: none;
-}
+/* =========================
+   CITIZEN DASHBOARD
+========================= */
 
 .dashboard-page {
   min-height: 100vh;
   display: flex;
   background: #f8f8fc;
 }
+
+
+/* Sidebar */
 
 .sidebar {
   width: 240px;
@@ -329,6 +338,9 @@ a.login-btn {
   color: #f5a7b2;
 }
 
+
+/* Dashboard Content */
+
 .dashboard-content {
   flex: 1;
   padding: 45px 6%;
@@ -361,6 +373,9 @@ a.login-btn {
 .new-complaint-btn {
   text-decoration: none;
 }
+
+
+/* Statistics */
 
 .stat-grid {
   display: grid;
@@ -398,6 +413,9 @@ a.login-btn {
   font-size: 24px;
 }
 
+
+/* Recent Complaints */
+
 .recent-section {
   padding: 22px;
   background: white;
@@ -407,7 +425,7 @@ a.login-btn {
 
 .section-heading {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 10px;
 }
@@ -429,6 +447,9 @@ a.login-btn {
   font-weight: bold;
 }
 
+
+/* Complaint Card */
+
 .complaint-card {
   display: flex;
   align-items: center;
@@ -437,10 +458,21 @@ a.login-btn {
   border-top: 1px solid #efedf4;
 }
 
+.complaint-card:first-of-type {
+  border-top: none;
+}
+
 .complaint-icon {
   padding: 11px;
   background: #f0ebff;
   border-radius: 9px;
+}
+
+.complaint-card-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  flex: 1;
 }
 
 .complaint-info {
@@ -451,6 +483,7 @@ a.login-btn {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 .complaint-title-row h3 {
@@ -465,11 +498,41 @@ a.login-btn {
   font-size: 12px;
 }
 
+.complaint-meta {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.complaint-meta span {
+  display: inline-block;
+}
+
+
+/* View Complaint Button */
+
+.view-complaint-btn,
+.view-button {
+  color: #6241c5;
+  background: none;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+
+/* Status Badges */
+
 .status-badge {
+  display: inline-block;
   padding: 4px 8px;
   border-radius: 20px;
   font-size: 10px;
   font-weight: bold;
+}
+
+.submitted {
+  color: #8a5a00;
+  background: #fff2d8;
 }
 
 .in-progress {
@@ -487,43 +550,10 @@ a.login-btn {
   background: #e2f1ff;
 }
 
-@media (max-width: 850px) {
-  .sidebar {
-    width: 190px;
-  }
 
-  .stat-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .sidebar {
-    display: none;
-  }
-
-  .dashboard-content {
-    padding: 30px 18px;
-  }
-
-  .dashboard-header {
-    align-items: start;
-    gap: 18px;
-    flex-direction: column;
-  }
-
-  .stat-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .complaint-card {
-    align-items: start;
-  }
-
-  .view-button {
-    display: none;
-  }
-}
+/* =========================
+   SUBMIT COMPLAINT
+========================= */
 
 .submit-page {
   min-height: 100vh;
@@ -599,6 +629,13 @@ a.login-btn {
   border: 1px solid #d7d4df;
   border-radius: 7px;
   font-size: 14px;
+  outline: none;
+}
+
+.form-section input:focus,
+.form-section select:focus,
+.form-section textarea:focus {
+  border-color: #7557ca;
 }
 
 .form-section textarea {
@@ -611,6 +648,9 @@ a.login-btn {
   grid-template-columns: 1fr 1fr;
   gap: 18px;
 }
+
+
+/* Upload */
 
 .upload-box {
   min-height: 120px;
@@ -636,6 +676,9 @@ a.login-btn {
   font-weight: normal;
 }
 
+
+/* Form Actions */
+
 .form-actions {
   display: flex;
   justify-content: flex-end;
@@ -643,7 +686,107 @@ a.login-btn {
   padding: 22px 32px;
 }
 
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 850px) {
+  .sidebar {
+    width: 190px;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-content {
+    padding: 35px 4%;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-info {
+    min-height: 260px;
+  }
+
+  .auth-info h2 {
+    font-size: 34px;
+  }
+
+  .auth-form-section {
+    padding: 45px 0;
+  }
+
+  .hero {
+    padding: 60px 8%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .hero-card {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+
 @media (max-width: 600px) {
+  .navbar {
+    padding: 0 5%;
+  }
+
+  .navbar nav {
+    gap: 8px;
+  }
+
+  .navbar nav a:not(.login-btn):not(.register-btn) {
+    display: none;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .dashboard-content {
+    padding: 30px 18px;
+  }
+
+  .dashboard-header {
+    align-items: flex-start;
+    gap: 18px;
+    flex-direction: column;
+  }
+
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .complaint-card {
+    align-items: flex-start;
+  }
+
+  .complaint-card-main {
+    width: 100%;
+  }
+
+  .view-complaint-btn {
+    display: none;
+  }
+
+  .complaint-meta {
+    gap: 8px;
+  }
+
   .submit-page {
     padding: 35px 18px;
   }
