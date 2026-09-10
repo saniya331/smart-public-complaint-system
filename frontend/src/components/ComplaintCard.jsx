@@ -1,14 +1,18 @@
+import { Link } from "react-router-dom";
 import StatusBadge from "./StatusBadge";
 
 function ComplaintCard({ complaint }) {
   return (
     <article className="complaint-card">
       <div className="complaint-card-main">
-        <div className="complaint-icon">📋</div>
+        <div className="complaint-icon">
+          📋
+        </div>
 
         <div className="complaint-info">
           <div className="complaint-title-row">
             <h3>{complaint.title}</h3>
+
             <StatusBadge status={complaint.status} />
           </div>
 
@@ -24,9 +28,12 @@ function ComplaintCard({ complaint }) {
         </div>
       </div>
 
-      <button className="view-complaint-btn">
+      <Link
+        to={`/citizen/complaints/${complaint.id}`}
+        className="view-complaint-btn"
+      >
         View details →
-      </button>
+      </Link>
     </article>
   );
 }

@@ -63,8 +63,18 @@ function ComplaintProvider({ children }) {
     return newComplaint;
   }
 
+  function getComplaintById(id) {
+    return complaints.find((complaint) => complaint.id === id);
+  }
+
   return (
-    <ComplaintContext.Provider value={{ complaints, addComplaint }}>
+    <ComplaintContext.Provider
+      value={{
+        complaints,
+        addComplaint,
+        getComplaintById,
+      }}
+    >
       {children}
     </ComplaintContext.Provider>
   );
