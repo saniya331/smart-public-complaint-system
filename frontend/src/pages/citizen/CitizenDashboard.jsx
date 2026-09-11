@@ -13,6 +13,10 @@ function CitizenDashboard() {
     (complaint) => complaint.status === "Resolved"
   ).length;
 
+  const assignedCount = complaints.filter(
+    (complaint) => complaint.status === "Assigned"
+  ).length;
+
   return (
     <main className="dashboard-page">
       <aside className="sidebar">
@@ -21,21 +25,27 @@ function CitizenDashboard() {
         </h2>
 
         <nav>
-          <a className="active-menu" href="#dashboard">
+          <Link
+            to="/citizen/dashboard"
+            className="active-menu"
+          >
             Dashboard
-          </a>
+          </Link>
 
           <Link to="/citizen/complaints">
-  My Complaints
+            My Complaints
+          </Link>
+
+          <Link to="/citizen/complaints">
+            Track Complaint
+          </Link>
+
+          
+          <Link to="/citizen/complaints">
+  Notifications
 </Link>
 
-          <a href="#track">
-            Track Complaint
-          </a>
-
-          <a href="#notifications">
-            Notifications
-          </a>
+          
         </nav>
 
         <Link className="logout-link" to="/">
@@ -92,11 +102,11 @@ function CitizenDashboard() {
           </div>
 
           <div className="stat-card">
-            <span>🔔</span>
+            <span>👤</span>
 
             <div>
-              <p>New Updates</p>
-              <h2>2</h2>
+              <p>Assigned</p>
+              <h2>{assignedCount}</h2>
             </div>
           </div>
         </section>
@@ -111,15 +121,39 @@ function CitizenDashboard() {
               </p>
             </div>
 
-            <button>View all</button>
+            <Link
+              to="/citizen/complaints"
+              className="view-all-link"
+            >
+              View all →
+            </Link>
           </div>
 
-          {complaints.map((complaint) => (
-            <ComplaintCard
-              key={complaint.id}
-              complaint={complaint}
-            />
-          ))}
+          {complaints.length > 0 ? (
+            complaints.slice(0, 3).map((complaint) => (
+              <ComplaintCard
+                key={complaint.id}
+                complaint={complaint}
+              />
+            ))
+          ) : (
+            <div className="empty-complaints">
+              <div>📋</div>
+
+              <h3>No complaints yet</h3>
+
+              <p>
+                Submit your first complaint to get started.
+              </p>
+
+              <Link
+                to="/citizen/submit"
+                className="primary-btn"
+              >
+                + Submit Complaint
+              </Link>
+            </div>
+          )}
         </section>
       </section>
     </main>

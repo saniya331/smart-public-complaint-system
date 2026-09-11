@@ -15,25 +15,30 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="/login" element={<Login />} />
+
           <Route path="/register" element={<Register />} />
+
           <Route
             path="/citizen/dashboard"
             element={<CitizenDashboard />}
           />
+
           <Route
             path="/citizen/submit"
             element={<SubmitComplaint />}
           />
-          <Route
-  path="/citizen/complaints"
-  element={<MyComplaints />}
-/>
 
-<Route
-  path="/citizen/complaints/:id"
-  element={<ComplaintDetails />}
-/>
+          <Route
+            path="/citizen/complaints"
+            element={<MyComplaints />}
+          />
+
+          <Route
+            path="/citizen/complaints/:id"
+            element={<ComplaintDetails />}
+          />
         </Routes>
       </BrowserRouter>
     </ComplaintProvider>
