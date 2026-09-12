@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 function Home() {
@@ -21,8 +22,13 @@ function Home() {
           </p>
 
           <div className="hero-buttons">
-            <button className="primary-btn">Raise a Complaint</button>
-            <button className="secondary-btn">Track Complaint</button>
+            <Link to="/citizen/submit" className="primary-btn">
+              Raise a Complaint
+            </Link>
+
+            <Link to="/citizen/complaints" className="secondary-btn">
+              Track Complaint
+            </Link>
           </div>
         </section>
 
