@@ -1040,3 +1040,29 @@ a.login-btn {
   font-size: 12px;
   line-height: 1.5;
 }
+
+/* =========================
+   FORM VALIDATION
+========================= */
+
+.form-error {
+  margin-bottom: 20px;
+  padding: 12px 15px;
+  border: 1px solid #f0b4b4;
+  border-radius: 8px;
+  background: #fff0f0;
+  color: #b42318;
+  font-size: 13px;
+}
+
+.upload-box small {
+  display: block;
+  margin-top: 8px;
+  color: #6241c5;
+  font-size: 12px;
+}
+
+.primary-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
