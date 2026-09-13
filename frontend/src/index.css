@@ -1066,3 +1066,23 @@ a.login-btn {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.language-select {
+  padding: 8px 12px;
+  border: 1px solid #ddd8ea;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+}
+
+.language-select:focus {
+  border-color: #7557ca;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+}

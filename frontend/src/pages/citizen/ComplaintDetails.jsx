@@ -1,10 +1,12 @@
 import { Link, useParams } from "react-router-dom";
 import useComplaints from "../../hooks/useComplaints";
 import StatusBadge from "../../components/StatusBadge";
+import { useLanguage } from "../../context/LanguageContext";
 
 function ComplaintDetails() {
   const { id } = useParams();
   const { getComplaintById } = useComplaints();
+  const { t } = useLanguage();
 
   const complaint = getComplaintById(id);
 
@@ -12,17 +14,12 @@ function ComplaintDetails() {
     return (
       <main className="dashboard-page">
         <section className="dashboard-content">
-          <h1>Complaint not found</h1>
+          <h1>{t("complaintNotFound")}</h1>
 
-          <p>
-            The complaint you are looking for does not exist.
-          </p>
+          <p>{t("complaintDoesNotExist")}</p>
 
-          <Link
-            to="/citizen/complaints"
-            className="primary-btn"
-          >
-            ← Back to My Complaints
+          <Link to="/citizen/complaints" className="primary-btn">
+            ← {t("backToComplaints")}
           </Link>
         </section>
       </main>
@@ -38,23 +35,27 @@ function ComplaintDetails() {
 
         <nav>
           <Link to="/citizen/dashboard">
-            Dashboard
+            {t("dashboard")}
           </Link>
 
           <Link
             to="/citizen/complaints"
             className="active-menu"
           >
-            My Complaints
+            {t("myComplaints")}
           </Link>
 
-          <a href="#track">Track Complaint</a>
+          <Link to="/citizen/complaints">
+            {t("trackComplaint")}
+          </Link>
 
-          <a href="#notifications">Notifications</a>
+          <Link to="/citizen/complaints">
+            {t("notifications")}
+          </Link>
         </nav>
 
         <Link className="logout-link" to="/">
-          ← Sign out
+          ← {t("logout")}
         </Link>
       </aside>
 
@@ -63,17 +64,19 @@ function ComplaintDetails() {
           to="/citizen/complaints"
           className="back-link"
         >
-          ← Back to My Complaints
+          ← {t("backToComplaints")}
         </Link>
 
         <header className="details-header">
           <div>
-            <p>Citizen Portal / Complaint Details</p>
+            <p>
+              {t("citizenPortal")} / {t("complaintDetails")}
+            </p>
 
             <h1>{complaint.title}</h1>
 
             <span>
-              Complaint ID: {complaint.id}
+              {t("complaintId")}: {complaint.id}
             </span>
           </div>
 
@@ -82,41 +85,41 @@ function ComplaintDetails() {
 
         <section className="details-grid">
           <div className="details-card">
-            <h2>Complaint Information</h2>
+            <h2>{t("complaintInformation")}</h2>
 
             <div className="detail-item">
-              <span>Category</span>
+              <span>{t("category")}</span>
               <strong>{complaint.category}</strong>
             </div>
 
             <div className="detail-item">
-              <span>Location</span>
+              <span>{t("location")}</span>
               <strong>{complaint.location}</strong>
             </div>
 
             <div className="detail-item">
-              <span>Submitted Date</span>
+              <span>{t("submittedDate")}</span>
               <strong>{complaint.date}</strong>
             </div>
 
             <div className="detail-item">
-              <span>Current Status</span>
+              <span>{t("currentStatus")}</span>
               <StatusBadge status={complaint.status} />
             </div>
           </div>
 
           <div className="details-card">
-            <h2>Complaint Tracking</h2>
+            <h2>{t("complaintTracking")}</h2>
 
             <div className="timeline">
               <div className="timeline-item completed">
                 <div className="timeline-dot">✓</div>
 
                 <div>
-                  <h3>Complaint Submitted</h3>
+                  <h3>{t("complaintSubmitted")}</h3>
+
                   <p>
-                    Your complaint has been successfully
-                    submitted.
+                    {t("submittedMessage")}
                   </p>
                 </div>
               </div>
@@ -133,10 +136,10 @@ function ComplaintDetails() {
                 </div>
 
                 <div>
-                  <h3>Complaint Assigned</h3>
+                  <h3>{t("complaintAssigned")}</h3>
+
                   <p>
-                    The complaint will be assigned to the
-                    responsible officer.
+                    {t("assignedMessage")}
                   </p>
                 </div>
               </div>
@@ -157,10 +160,10 @@ function ComplaintDetails() {
                 </div>
 
                 <div>
-                  <h3>Work in Progress</h3>
+                  <h3>{t("workInProgress")}</h3>
+
                   <p>
-                    The responsible department is working
-                    on the complaint.
+                    {t("progressMessage")}
                   </p>
                 </div>
               </div>
@@ -173,15 +176,14 @@ function ComplaintDetails() {
                 }
               >
                 <div className="timeline-dot">
-                  {complaint.status === "Resolved"
-                    ? "✓"
-                    : "4"}
+                  {complaint.status === "Resolved" ? "✓" : "4"}
                 </div>
 
                 <div>
-                  <h3>Complaint Resolved</h3>
+                  <h3>{t("complaintResolved")}</h3>
+
                   <p>
-                    The complaint has been resolved.
+                    {t("resolvedMessage")}
                   </p>
                 </div>
               </div>

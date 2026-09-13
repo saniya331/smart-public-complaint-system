@@ -1,42 +1,42 @@
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { useLanguage } from "../context/LanguageContext";
 
 function Home() {
+  const { t } = useLanguage();
+
   return (
     <>
       <Navbar />
 
       <main className="hero">
         <section className="hero-content">
-          <p className="tagline">SMART PUBLIC GRIEVANCE PORTAL</p>
+          <p className="tagline">{t("tagline")}</p>
 
           <h1>
-            Your city. Your voice.
+            {t("heroTitle1")}
             <br />
-            <span>Clear action.</span>
+            <span>{t("heroTitle2")}</span>
           </h1>
 
-          <p className="description">
-            Report local issues, track every update, and help build a more
-            responsive community.
-          </p>
+          <p className="description">{t("heroDescription")}</p>
 
           <div className="hero-buttons">
             <Link to="/citizen/submit" className="primary-btn">
-              Raise a Complaint
+              {t("raiseComplaint")}
             </Link>
 
             <Link to="/citizen/complaints" className="secondary-btn">
-              Track Complaint
+              {t("trackComplaint")}
             </Link>
           </div>
         </section>
 
         <section className="hero-card">
-          <p>LIVE CIVIC RESPONSE</p>
-          <h3>Issues resolved this month</h3>
+          <p>{t("liveCivicResponse")}</p>
+          <h3>{t("issuesResolved")}</h3>
           <h2>1,248</h2>
-          <span>↑ 18% improvement</span>
+          <span>{t("improvement")}</span>
         </section>
       </main>
     </>

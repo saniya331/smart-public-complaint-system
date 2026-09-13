@@ -1,13 +1,22 @@
 import { Link } from "react-router-dom";
 import StatusBadge from "./StatusBadge";
+import { useLanguage } from "../context/LanguageContext";
 
 function ComplaintCard({ complaint }) {
+  const { t } = useLanguage();
+
+  const categoryText = {
+    Electricity: t("electricity"),
+    Sanitation: t("sanitation"),
+    "Roads & Transport": t("roadsTransport"),
+    "Water Supply": t("waterSupply"),
+    "Public Safety": t("publicSafety"),
+  };
+
   return (
     <article className="complaint-card">
       <div className="complaint-card-main">
-        <div className="complaint-icon">
-          📋
-        </div>
+        <div className="complaint-icon">📋</div>
 
         <div className="complaint-info">
           <div className="complaint-title-row">
@@ -17,13 +26,21 @@ function ComplaintCard({ complaint }) {
           </div>
 
           <p className="complaint-id">
-            Complaint ID: {complaint.id}
+            {t("complaintId")}: {complaint.id}
           </p>
 
           <div className="complaint-meta">
-            <span>📂 {complaint.category}</span>
-            <span>📍 {complaint.location}</span>
-            <span>📅 {complaint.date}</span>
+            <span>
+              📂 {categoryText[complaint.category] || complaint.category}
+            </span>
+
+            <span>
+              📍 {complaint.location}
+            </span>
+
+            <span>
+              📅 {complaint.date}
+            </span>
           </div>
         </div>
       </div>
@@ -32,7 +49,7 @@ function ComplaintCard({ complaint }) {
         to={`/citizen/complaints/${complaint.id}`}
         className="view-complaint-btn"
       >
-        View details →
+        {t("viewDetails")} →
       </Link>
     </article>
   );

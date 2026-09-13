@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import ComplaintCard from "../../components/ComplaintCard";
 import useComplaints from "../../hooks/useComplaints";
+import { useLanguage } from "../../context/LanguageContext";
 
 function CitizenDashboard() {
   const { complaints } = useComplaints();
+  const { t } = useLanguage();
 
   const inProgressCount = complaints.filter(
     (complaint) => complaint.status === "In Progress"
@@ -25,87 +27,79 @@ function CitizenDashboard() {
         </h2>
 
         <nav>
-          <Link
-            to="/citizen/dashboard"
-            className="active-menu"
-          >
-            Dashboard
+          <Link to="/citizen/dashboard" className="active-menu">
+            {t("dashboard")}
           </Link>
 
           <Link to="/citizen/complaints">
-            My Complaints
+            {t("myComplaints")}
           </Link>
 
           <Link to="/citizen/complaints">
-            Track Complaint
+            {t("trackComplaint")}
           </Link>
 
-          
           <Link to="/citizen/complaints">
-  Notifications
-</Link>
-
-          
+            {t("notifications")}
+          </Link>
         </nav>
 
         <Link className="logout-link" to="/">
-          ← Sign out
+          ← {t("logout")}
         </Link>
       </aside>
 
       <section className="dashboard-content">
         <header className="dashboard-header">
           <div>
-            <p>Citizen Portal / Dashboard</p>
+            <p>
+              {t("citizenPortal")} / {t("dashboard")}
+            </p>
 
-            <h1>Good morning, Saniya</h1>
+            <h1>
+              {t("goodMorning")}, Saniya
+            </h1>
 
-            <span>
-              Here is an overview of your civic complaints.
-            </span>
+            <span>{t("dashboardDescription")}</span>
           </div>
 
           <Link
             className="primary-btn new-complaint-btn"
             to="/citizen/submit"
           >
-            + New Complaint
+            + {t("newComplaint")}
           </Link>
         </header>
 
         <section className="stat-grid">
           <div className="stat-card">
             <span>📋</span>
-
             <div>
-              <p>Total Complaints</p>
+              <p>{t("totalComplaints")}</p>
               <h2>{complaints.length}</h2>
             </div>
           </div>
 
           <div className="stat-card">
             <span>⏳</span>
-
             <div>
-              <p>In Progress</p>
+              <p>{t("inProgress")}</p>
               <h2>{inProgressCount}</h2>
             </div>
           </div>
 
           <div className="stat-card">
             <span>✓</span>
-
             <div>
-              <p>Resolved</p>
+              <p>{t("resolved")}</p>
               <h2>{resolvedCount}</h2>
             </div>
           </div>
 
           <div className="stat-card">
             <span>👤</span>
-
             <div>
-              <p>Assigned</p>
+              <p>{t("assigned")}</p>
               <h2>{assignedCount}</h2>
             </div>
           </div>
@@ -114,18 +108,15 @@ function CitizenDashboard() {
         <section className="recent-section">
           <div className="section-heading">
             <div>
-              <h2>Recent complaints</h2>
-
-              <p>
-                Track the latest progress on your submitted issues.
-              </p>
+              <h2>{t("recentComplaints")}</h2>
+              <p>{t("recentComplaintsDescription")}</p>
             </div>
 
             <Link
               to="/citizen/complaints"
               className="view-all-link"
             >
-              View all →
+              {t("viewAll")} →
             </Link>
           </div>
 
@@ -140,17 +131,15 @@ function CitizenDashboard() {
             <div className="empty-complaints">
               <div>📋</div>
 
-              <h3>No complaints yet</h3>
+              <h3>{t("noComplaintsFound")}</h3>
 
-              <p>
-                Submit your first complaint to get started.
-              </p>
+              <p>{t("changeSearch")}</p>
 
               <Link
                 to="/citizen/submit"
                 className="primary-btn"
               >
-                + Submit Complaint
+                + {t("newComplaint")}
               </Link>
             </div>
           )}

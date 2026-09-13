@@ -2,9 +2,11 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import ComplaintCard from "../../components/ComplaintCard";
 import useComplaints from "../../hooks/useComplaints";
+import { useLanguage } from "../../context/LanguageContext";
 
 function MyComplaints() {
   const { complaints } = useComplaints();
+  const { t } = useLanguage();
 
   const [statusFilter, setStatusFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,8 +14,7 @@ function MyComplaints() {
   const filteredComplaints = useMemo(() => {
     return complaints.filter((complaint) => {
       const matchesStatus =
-        statusFilter === "All" ||
-        complaint.status === statusFilter;
+        statusFilter === "All" || complaint.status === statusFilter;
 
       const search = searchTerm.toLowerCase();
 
@@ -29,8 +30,6 @@ function MyComplaints() {
 
   return (
     <main className="dashboard-page">
-      {/* Sidebar */}
-
       <aside className="sidebar">
         <h2>
           Civic<span>Voice</span>
@@ -38,54 +37,54 @@ function MyComplaints() {
 
         <nav>
           <Link to="/citizen/dashboard">
-            Dashboard
+            {t("dashboard")}
           </Link>
 
           <Link
             to="/citizen/complaints"
             className="active-menu"
           >
-            My Complaints
+            {t("myComplaints")}
           </Link>
 
-          <a href="#track">Track Complaint</a>
+          <Link to="/citizen/complaints">
+            {t("trackComplaint")}
+          </Link>
 
-          <a href="#notifications">Notifications</a>
+          <Link to="/citizen/complaints">
+            {t("notifications")}
+          </Link>
         </nav>
 
         <Link className="logout-link" to="/">
-          ← Sign out
+          ← {t("logout")}
         </Link>
       </aside>
-
-      {/* Main Content */}
 
       <section className="dashboard-content">
         <header className="dashboard-header">
           <div>
-            <p>Citizen Portal / My Complaints</p>
+            <p>
+              {t("citizenPortal")} / {t("myComplaints")}
+            </p>
 
-            <h1>My Complaints</h1>
+            <h1>{t("myComplaints")}</h1>
 
-            <span>
-              View and manage all your submitted complaints.
-            </span>
+            <span>{t("myComplaintsDescription")}</span>
           </div>
 
           <Link
             className="primary-btn new-complaint-btn"
             to="/citizen/submit"
           >
-            + New Complaint
+            + {t("newComplaint")}
           </Link>
         </header>
-
-        {/* Search and Filter */}
 
         <section className="complaint-tools">
           <input
             type="text"
-            placeholder="Search complaints..."
+            placeholder={t("searchComplaints")}
             value={searchTerm}
             onChange={(event) =>
               setSearchTerm(event.target.value)
@@ -98,22 +97,18 @@ function MyComplaints() {
               setStatusFilter(event.target.value)
             }
           >
-            <option value="All">All Statuses</option>
-            <option value="Submitted">Submitted</option>
-            <option value="Assigned">Assigned</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Resolved">Resolved</option>
+            <option value="All">{t("allStatuses")}</option>
+            <option value="Submitted">{t("submitted")}</option>
+            <option value="Assigned">{t("assigned")}</option>
+            <option value="In Progress">{t("inProgress")}</option>
+            <option value="Resolved">{t("resolved")}</option>
           </select>
         </section>
 
-        {/* Complaint Count */}
-
         <div className="complaint-count">
-          Showing {filteredComplaints.length} of{" "}
-          {complaints.length} complaints
+          {t("showing")} {filteredComplaints.length} {t("of")}{" "}
+          {complaints.length} {t("complaints")}
         </div>
-
-        {/* Complaints */}
 
         <section className="recent-section">
           {filteredComplaints.length > 0 ? (
@@ -127,11 +122,9 @@ function MyComplaints() {
             <div className="empty-complaints">
               <div>📋</div>
 
-              <h3>No complaints found</h3>
+              <h3>{t("noComplaintsFound")}</h3>
 
-              <p>
-                Try changing your search or status filter.
-              </p>
+              <p>{t("changeSearch")}</p>
             </div>
           )}
         </section>

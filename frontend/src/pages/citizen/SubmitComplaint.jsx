@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useComplaints from "../../hooks/useComplaints";
+import { useLanguage } from "../../context/LanguageContext";
 
 function SubmitComplaint() {
   const navigate = useNavigate();
   const { addComplaint } = useComplaints();
+  const { t } = useLanguage();
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [error, setError] = useState("");
@@ -67,51 +69,57 @@ function SubmitComplaint() {
   return (
     <main className="submit-page">
       <header className="submit-header">
-        <p>Citizen Portal / My Complaints / New Complaint</p>
+        <p>
+          {t("citizenPortal")} / {t("myComplaints")} /{" "}
+          {t("newComplaint")}
+        </p>
 
-        <h1>Raise a complaint</h1>
+        <h1>{t("raiseAComplaint")}</h1>
 
-        <span>
-          Share the details. We will route it to the right department.
-        </span>
+        <span>{t("submitDescription")}</span>
       </header>
 
-      <form
-        className="complaint-form"
-        onSubmit={handleSubmit}
-      >
-        {error && (
-          <div className="form-error">
-            {error}
-          </div>
-        )}
+      <form className="complaint-form" onSubmit={handleSubmit}>
+        {error && <div className="form-error">{error}</div>}
 
         <section className="form-section">
-          <h2>What is the issue?</h2>
+          <h2>{t("whatIsTheIssue")}</h2>
 
-          <p>
-            Select the correct category to help us assign it faster.
-          </p>
+          <p>{t("selectCategoryDescription")}</p>
 
           <div className="form-grid">
             <div>
-              <label>Complaint category</label>
+              <label>{t("complaintCategory")}</label>
 
               <select name="category" required>
                 <option value="">
-                  Select a category
+                  {t("selectCategory")}
                 </option>
 
-                <option>Electricity</option>
-                <option>Sanitation</option>
-                <option>Roads & Transport</option>
-                <option>Water Supply</option>
-                <option>Public Safety</option>
+                <option value="Electricity">
+                  {t("electricity")}
+                </option>
+
+                <option value="Sanitation">
+                  {t("sanitation")}
+                </option>
+
+                <option value="Roads & Transport">
+                  {t("roadsTransport")}
+                </option>
+
+                <option value="Water Supply">
+                  {t("waterSupply")}
+                </option>
+
+                <option value="Public Safety">
+                  {t("publicSafety")}
+                </option>
               </select>
             </div>
 
             <div>
-              <label>Issue title</label>
+              <label>{t("issueTitle")}</label>
 
               <input
                 name="title"
@@ -122,66 +130,66 @@ function SubmitComplaint() {
             </div>
           </div>
 
-          <label>Describe the issue</label>
+          <label>{t("describeIssue")}</label>
 
           <textarea
             name="description"
-            placeholder="Explain the problem clearly. Include useful details such as how long the issue has existed."
+            placeholder={t("descriptionPlaceholder")}
             required
           />
         </section>
 
         <section className="form-section">
-          <h2>Where is the issue?</h2>
+          <h2>{t("whereIsTheIssue")}</h2>
 
-          <p>
-            Give the location so the department can take action.
-          </p>
+          <p>{t("locationDescription")}</p>
 
           <div className="form-grid">
             <div>
-              <label>District</label>
+              <label>{t("district")}</label>
 
               <select name="district" required>
                 <option value="">
-                  Select district
+                  {t("selectDistrict")}
                 </option>
 
-                <option>Hyderabad</option>
-                <option>Rangareddy</option>
-                <option>Medchal-Malkajgiri</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Rangareddy">Rangareddy</option>
+                <option value="Medchal-Malkajgiri">
+                  Medchal-Malkajgiri
+                </option>
               </select>
             </div>
 
             <div>
-              <label>Mandal / Locality</label>
+              <label>{t("mandalLocality")}</label>
 
               <select name="mandal" required>
                 <option value="">
-                  Select locality
+                  {t("selectLocality")}
                 </option>
 
-                <option>Miyapur</option>
-                <option>Gachibowli</option>
-                <option>Kukatpally</option>
+                <option value="Miyapur">Miyapur</option>
+                <option value="Gachibowli">Gachibowli</option>
+                <option value="Kukatpally">Kukatpally</option>
               </select>
             </div>
           </div>
 
-          <label>Exact location or nearby landmark</label>
+          <label>{t("exactLocation")}</label>
 
           <input
             name="landmark"
             type="text"
-            placeholder="Example: Near community library, 3rd cross road"
+            placeholder={t("landmarkPlaceholder")}
             required
           />
         </section>
 
         <section className="form-section">
           <h2>
-            Upload supporting photo{" "}
-            <small>(optional)</small>
+            {t("uploadEvidence")}{" "}
+            <small>({t("optional")})</small>
           </h2>
 
           <label className="upload-box">
@@ -191,13 +199,9 @@ function SubmitComplaint() {
               onChange={handleFileChange}
             />
 
-            <strong>
-              ＋ Upload an image
-            </strong>
+            <strong>{t("uploadImage")}</strong>
 
-            <span>
-              JPG or PNG, maximum size 10 MB
-            </span>
+            <span>{t("imageFormat")}</span>
 
             {selectedFile && (
               <small>
@@ -215,7 +219,7 @@ function SubmitComplaint() {
               navigate("/citizen/dashboard")
             }
           >
-            Cancel
+            {t("cancel")}
           </button>
 
           <button
@@ -224,8 +228,8 @@ function SubmitComplaint() {
             disabled={isSubmitting}
           >
             {isSubmitting
-              ? "Submitting..."
-              : "Submit Complaint"}
+              ? t("submitting")
+              : t("submitComplaint")}
           </button>
         </div>
       </form>
