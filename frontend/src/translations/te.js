@@ -115,6 +115,36 @@ resolvedMessage:
   publicSafety: "ప్రజా భద్రత",
 
   viewDetails: "వివరాలను చూడండి",
+
+  // Login
+welcomeBack: "తిరిగి స్వాగతం",
+everyConcernResponse: "ప్రతి సమస్యకు స్పందన అవసరం.",
+trackComplaintsBetterCity:
+  "మీ ఫిర్యాదులను ట్రాక్ చేసి మెరుగైన నగరాన్ని నిర్మించడంలో సహాయపడండి.",
+backToHome: "హోమ్‌కు తిరిగి వెళ్లండి",
+signInContinue: "మీ డ్యాష్‌బోర్డ్‌ను కొనసాగించడానికి సైన్ ఇన్ చేయండి.",
+emailAddress: "ఇమెయిల్ చిరునామా",
+emailPlaceholder: "you@example.com",
+password: "పాస్‌వర్డ్",
+passwordPlaceholder: "మీ పాస్‌వర్డ్‌ను నమోదు చేయండి",
+rememberMe: "నన్ను గుర్తుంచుకోండి",
+forgotPassword: "పాస్‌వర్డ్ మర్చిపోయారా?",
+signIn: "సైన్ ఇన్",
+newToCivicVoice: "CivicVoice కి కొత్తగా వచ్చారా?",
+createAccount: "ఖాతాను సృష్టించండి",
+
+// Register
+joinCommunity: "మీ సంఘంలో చేరండి",
+makeVoiceCount: "మీ స్వరానికి విలువ ఇవ్వండి.",
+raiseIssuesImproveServices:
+  "ముఖ్యమైన సమస్యలను నివేదించి ప్రజా సేవలను మెరుగుపరచడంలో సహాయపడండి.",
+registerReportTrack:
+  "పౌర సమస్యలను నివేదించడానికి మరియు ట్రాక్ చేయడానికి నమోదు చేసుకోండి.",
+fullName: "పూర్తి పేరు",
+fullNamePlaceholder: "మీ పూర్తి పేరును నమోదు చేయండి",
+mobileNumber: "మొబైల్ నంబర్",
+createPasswordPlaceholder: "పాస్‌వర్డ్‌ను సృష్టించండి",
+alreadyHaveAccount: "ఇప్పటికే ఖాతా ఉందా?",
 };
 
 export default te;

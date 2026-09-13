@@ -1,42 +1,66 @@
 import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 function Register() {
+  const { t } = useLanguage();
+
   return (
     <main className="auth-page">
       <section className="auth-info">
-        <h1>Civic<span>Voice</span></h1>
+        <h1>
+          Civic<span>Voice</span>
+        </h1>
+
         <div>
-          <p className="tagline">JOIN YOUR COMMUNITY</p>
-          <h2>Make your voice count.</h2>
-          <p>Raise issues that matter and help improve public services.</p>
+          <p className="tagline">{t("joinCommunity")}</p>
+          <h2>{t("makeVoiceCount")}</h2>
+          <p>{t("raiseIssuesImproveServices")}</p>
         </div>
       </section>
 
       <section className="auth-form-section">
         <form className="auth-form">
-          <Link className="back-link" to="/">← Back to home</Link>
+          <Link className="back-link" to="/">
+            ← {t("backToHome")}
+          </Link>
 
-          <h2>Create account</h2>
-          <p>Register to report and track civic issues.</p>
+          <h2>{t("createAccount")}</h2>
+          <p>{t("registerReportTrack")}</p>
 
-          <label>Full name</label>
-          <input type="text" placeholder="Enter your full name" />
+          <label>{t("fullName")}</label>
+          <input
+            type="text"
+            placeholder={t("fullNamePlaceholder")}
+          />
 
-          <label>Email address</label>
-          <input type="email" placeholder="you@example.com" />
+          <label>{t("emailAddress")}</label>
+          <input
+            type="email"
+            placeholder={t("emailPlaceholder")}
+          />
 
-          <label>Mobile number</label>
-          <input type="tel" placeholder="98765 43210" />
+          <label>{t("mobileNumber")}</label>
+          <input
+            type="tel"
+            placeholder="98765 43210"
+          />
 
-          <label>Password</label>
-          <input type="password" placeholder="Create a password" />
+          <label>{t("password")}</label>
+          <input
+            type="password"
+            placeholder={t("createPasswordPlaceholder")}
+          />
 
-          <button type="button" className="primary-btn full-btn">
-            Create account
+          <button
+            type="button"
+            className="primary-btn full-btn"
+          >
+            {t("createAccount")}
           </button>
 
           <p className="switch-page">
-            Already have an account? <Link to="/login">Sign in</Link>
+            {t("alreadyHaveAccount")}{" "}
+            <Link to="/login">{t("signIn")}</Link>
           </p>
         </form>
       </section>

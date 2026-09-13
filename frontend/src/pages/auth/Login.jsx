@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext";
 
 function Login() {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   return (
     <main className="auth-page">
@@ -11,34 +13,40 @@ function Login() {
         </h1>
 
         <div>
-          <p className="tagline">WELCOME BACK</p>
-          <h2>Every concern deserves a response.</h2>
-          <p>Track your complaints and help build a better city.</p>
+          <p className="tagline">{t("welcomeBack")}</p>
+          <h2>{t("everyConcernResponse")}</h2>
+          <p>{t("trackComplaintsBetterCity")}</p>
         </div>
       </section>
 
       <section className="auth-form-section">
         <form className="auth-form">
           <Link className="back-link" to="/">
-            ← Back to home
+            ← {t("backToHome")}
           </Link>
 
-          <h2>Welcome back</h2>
-          <p>Sign in to continue to your dashboard.</p>
+          <h2>{t("welcomeBack")}</h2>
+          <p>{t("signInContinue")}</p>
 
-          <label>Email address</label>
-          <input type="email" placeholder="you@example.com" />
+          <label>{t("emailAddress")}</label>
+          <input
+            type="email"
+            placeholder={t("emailPlaceholder")}
+          />
 
-          <label>Password</label>
-          <input type="password" placeholder="Enter your password" />
+          <label>{t("password")}</label>
+          <input
+            type="password"
+            placeholder={t("passwordPlaceholder")}
+          />
 
           <div className="form-row">
             <label className="remember">
               <input type="checkbox" />
-              Remember me
+              {t("rememberMe")}
             </label>
 
-            <a href="#forgot">Forgot password?</a>
+            <a href="#forgot">{t("forgotPassword")}</a>
           </div>
 
           <button
@@ -46,12 +54,12 @@ function Login() {
             className="primary-btn full-btn"
             onClick={() => navigate("/citizen/dashboard")}
           >
-            Sign in
+            {t("signIn")}
           </button>
 
           <p className="switch-page">
-            New to CivicVoice?{" "}
-            <Link to="/register">Create an account</Link>
+            {t("newToCivicVoice")}{" "}
+            <Link to="/register">{t("createAccount")}</Link>
           </p>
         </form>
       </section>

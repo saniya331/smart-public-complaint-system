@@ -112,6 +112,38 @@ resolvedMessage:
   roadsTransport: "Roads & Transport",
   waterSupply: "Water Supply",
   publicSafety: "Public Safety",
+
+  viewDetails: "View details",
+
+  // Login
+welcomeBack: "WELCOME BACK",
+everyConcernResponse: "Every concern deserves a response.",
+trackComplaintsBetterCity:
+  "Track your complaints and help build a better city.",
+backToHome: "Back to home",
+signInContinue: "Sign in to continue to your dashboard.",
+emailAddress: "Email address",
+emailPlaceholder: "you@example.com",
+password: "Password",
+passwordPlaceholder: "Enter your password",
+rememberMe: "Remember me",
+forgotPassword: "Forgot password?",
+signIn: "Sign in",
+newToCivicVoice: "New to CivicVoice?",
+createAccount: "Create an account",
+
+// Register
+joinCommunity: "JOIN YOUR COMMUNITY",
+makeVoiceCount: "Make your voice count.",
+raiseIssuesImproveServices:
+  "Raise issues that matter and help improve public services.",
+registerReportTrack:
+  "Register to report and track civic issues.",
+fullName: "Full name",
+fullNamePlaceholder: "Enter your full name",
+mobileNumber: "Mobile number",
+createPasswordPlaceholder: "Create a password",
+alreadyHaveAccount: "Already have an account?",
 };
 
 export default en;

@@ -114,6 +114,36 @@ resolvedMessage:
   publicSafety: "सार्वजनिक सुरक्षा",
 
   viewDetails: "विवरण देखें",
+
+  // Login
+welcomeBack: "वापसी पर स्वागत है",
+everyConcernResponse: "हर समस्या का समाधान मिलना चाहिए।",
+trackComplaintsBetterCity:
+  "अपनी शिकायतों को ट्रैक करें और एक बेहतर शहर बनाने में मदद करें।",
+backToHome: "होम पर वापस जाएँ",
+signInContinue: "अपने डैशबोर्ड पर जाने के लिए साइन इन करें।",
+emailAddress: "ईमेल पता",
+emailPlaceholder: "you@example.com",
+password: "पासवर्ड",
+passwordPlaceholder: "अपना पासवर्ड दर्ज करें",
+rememberMe: "मुझे याद रखें",
+forgotPassword: "पासवर्ड भूल गए?",
+signIn: "साइन इन",
+newToCivicVoice: "CivicVoice पर नए हैं?",
+createAccount: "खाता बनाएँ",
+
+// Register
+joinCommunity: "अपने समुदाय से जुड़ें",
+makeVoiceCount: "अपनी आवाज़ को महत्व दें।",
+raiseIssuesImproveServices:
+  "महत्वपूर्ण समस्याएँ उठाएँ और सार्वजनिक सेवाओं को बेहतर बनाने में मदद करें।",
+registerReportTrack:
+  "नागरिक समस्याओं की रिपोर्ट और ट्रैक करने के लिए पंजीकरण करें।",
+fullName: "पूरा नाम",
+fullNamePlaceholder: "अपना पूरा नाम दर्ज करें",
+mobileNumber: "मोबाइल नंबर",
+createPasswordPlaceholder: "पासवर्ड बनाएँ",
+alreadyHaveAccount: "पहले से खाता है?",
 };
 
 export default hi;
