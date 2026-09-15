@@ -145,6 +145,17 @@ fullNamePlaceholder: "మీ పూర్తి పేరును నమోద�
 mobileNumber: "మొబైల్ నంబర్",
 createPasswordPlaceholder: "పాస్‌వర్డ్‌ను సృష్టించండి",
 alreadyHaveAccount: "ఇప్పటికే ఖాతా ఉందా?",
+
+// Complaint Evidence
+required: "అవసరం",
+evidenceDescription:
+  "సమస్యను స్పష్టంగా చూపించే ఫోటోను అప్‌లోడ్ చేయండి. ఇది సంబంధిత విభాగానికి ఫిర్యాదును ధృవీకరించడంలో సహాయపడుతుంది.",
+evidencePreview: "సాక్ష్య చిత్రం",
+removeImage: "చిత్రాన్ని తొలగించండి",
+invalidImageType: "JPG లేదా PNG చిత్రాలను మాత్రమే అప్‌లోడ్ చేయండి.",
+imageTooLarge: "చిత్ర పరిమాణం 10 MB కంటే తక్కువగా ఉండాలి.",
+evidenceRequired: "ఫిర్యాదును సమర్పించే ముందు సాక్ష్య చిత్రాన్ని అప్‌లోడ్ చేయండి.",
+complaintSubmittedSuccess: "ఫిర్యాదు విజయవంతంగా సమర్పించబడింది!",
 };
 
 export default te;

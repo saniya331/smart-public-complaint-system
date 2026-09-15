@@ -144,6 +144,17 @@ fullNamePlaceholder: "Enter your full name",
 mobileNumber: "Mobile number",
 createPasswordPlaceholder: "Create a password",
 alreadyHaveAccount: "Already have an account?",
+
+// Complaint Evidence
+required: "required",
+evidenceDescription:
+  "Upload a clear photo showing the issue. This helps the responsible department verify the complaint.",
+evidencePreview: "Evidence preview",
+removeImage: "Remove image",
+invalidImageType: "Please upload only JPG or PNG images.",
+imageTooLarge: "Image size must be less than 10 MB.",
+evidenceRequired: "Please upload complaint evidence before submitting.",
+complaintSubmittedSuccess: "Complaint submitted successfully!",
 };
 
 export default en;

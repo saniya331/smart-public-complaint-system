@@ -1086,3 +1086,56 @@ a.login-btn {
   display: flex;
   align-items: center;
 }
+
+.image-preview-container {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #ddd8ea;
+  border-radius: 12px;
+  background: #faf9fc;
+}
+
+.evidence-preview {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e2deea;
+}
+
+.selected-file-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #555;
+}
+
+.selected-file-info strong {
+  color: #333;
+  word-break: break-word;
+}
+
+.selected-file-info span {
+  white-space: nowrap;
+  color: #777;
+}
+
+.remove-image-btn {
+  margin-top: 12px;
+  padding: 8px 14px;
+  border: 1px solid #d8d2e3;
+  border-radius: 8px;
+  background: white;
+  color: #5b34c4;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.remove-image-btn:hover {
+  background: #f3effb;
+}

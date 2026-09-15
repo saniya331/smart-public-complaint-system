@@ -9,6 +9,7 @@ function SubmitComplaint() {
   const { t } = useLanguage();
 
   const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -16,32 +17,52 @@ function SubmitComplaint() {
     const file = event.target.files[0];
 
     if (!file) {
-      setSelectedFile(null);
       return;
     }
 
     if (!["image/jpeg", "image/png"].includes(file.type)) {
-      setError("Please upload only JPG or PNG images.");
-      event.target.value = "";
+      setError(t("invalidImageType"));
       setSelectedFile(null);
+      setPreviewUrl("");
+      event.target.value = "";
       return;
     }
 
     if (file.size > 10 * 1024 * 1024) {
-      setError("Image size must be less than 10 MB.");
-      event.target.value = "";
+      setError(t("imageTooLarge"));
       setSelectedFile(null);
+      setPreviewUrl("");
+      event.target.value = "";
       return;
     }
 
     setError("");
     setSelectedFile(file);
+    setPreviewUrl(URL.createObjectURL(file));
+  }
+
+  function removeImage() {
+    setSelectedFile(null);
+    setPreviewUrl("");
+    setError("");
+
+    const fileInput = document.getElementById("evidence-image");
+
+    if (fileInput) {
+      fileInput.value = "";
+    }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
 
     setError("");
+
+    if (!selectedFile) {
+      setError(t("evidenceRequired"));
+      return;
+    }
+
     setIsSubmitting(true);
 
     const formData = new FormData(event.currentTarget);
@@ -59,7 +80,9 @@ function SubmitComplaint() {
       setIsSubmitting(false);
 
       alert(
-        `Complaint submitted successfully!\n\nYour Complaint ID is ${newComplaint.id}`
+        `${t("complaintSubmittedSuccess")}\n\n${t(
+          "complaintId"
+        )}: ${newComplaint.id}`
       );
 
       navigate("/citizen/complaints");
@@ -84,7 +107,6 @@ function SubmitComplaint() {
 
         <section className="form-section">
           <h2>{t("whatIsTheIssue")}</h2>
-
           <p>{t("selectCategoryDescription")}</p>
 
           <div className="form-grid">
@@ -92,29 +114,14 @@ function SubmitComplaint() {
               <label>{t("complaintCategory")}</label>
 
               <select name="category" required>
-                <option value="">
-                  {t("selectCategory")}
-                </option>
-
-                <option value="Electricity">
-                  {t("electricity")}
-                </option>
-
-                <option value="Sanitation">
-                  {t("sanitation")}
-                </option>
-
+                <option value="">{t("selectCategory")}</option>
+                <option value="Electricity">{t("electricity")}</option>
+                <option value="Sanitation">{t("sanitation")}</option>
                 <option value="Roads & Transport">
                   {t("roadsTransport")}
                 </option>
-
-                <option value="Water Supply">
-                  {t("waterSupply")}
-                </option>
-
-                <option value="Public Safety">
-                  {t("publicSafety")}
-                </option>
+                <option value="Water Supply">{t("waterSupply")}</option>
+                <option value="Public Safety">{t("publicSafety")}</option>
               </select>
             </div>
 
@@ -141,7 +148,6 @@ function SubmitComplaint() {
 
         <section className="form-section">
           <h2>{t("whereIsTheIssue")}</h2>
-
           <p>{t("locationDescription")}</p>
 
           <div className="form-grid">
@@ -149,10 +155,7 @@ function SubmitComplaint() {
               <label>{t("district")}</label>
 
               <select name="district" required>
-                <option value="">
-                  {t("selectDistrict")}
-                </option>
-
+                <option value="">{t("selectDistrict")}</option>
                 <option value="Hyderabad">Hyderabad</option>
                 <option value="Rangareddy">Rangareddy</option>
                 <option value="Medchal-Malkajgiri">
@@ -165,10 +168,7 @@ function SubmitComplaint() {
               <label>{t("mandalLocality")}</label>
 
               <select name="mandal" required>
-                <option value="">
-                  {t("selectLocality")}
-                </option>
-
+                <option value="">{t("selectLocality")}</option>
                 <option value="Miyapur">Miyapur</option>
                 <option value="Gachibowli">Gachibowli</option>
                 <option value="Kukatpally">Kukatpally</option>
@@ -189,35 +189,55 @@ function SubmitComplaint() {
         <section className="form-section">
           <h2>
             {t("uploadEvidence")}{" "}
-            <small>({t("optional")})</small>
+            <small>({t("required")})</small>
           </h2>
 
-          <label className="upload-box">
-            <input
-              type="file"
-              accept="image/png, image/jpeg"
-              onChange={handleFileChange}
-            />
+          <p>{t("evidenceDescription")}</p>
 
-            <strong>{t("uploadImage")}</strong>
+          {!selectedFile ? (
+            <label className="upload-box">
+              <input
+                id="evidence-image"
+                type="file"
+                accept="image/png, image/jpeg"
+                onChange={handleFileChange}
+              />
 
-            <span>{t("imageFormat")}</span>
+              <strong>{t("uploadImage")}</strong>
+              <span>{t("imageFormat")}</span>
+            </label>
+          ) : (
+            <div className="image-preview-container">
+              <img
+                src={previewUrl}
+                alt={t("evidencePreview")}
+                className="evidence-preview"
+              />
 
-            {selectedFile && (
-              <small>
-                Selected: {selectedFile.name}
-              </small>
-            )}
-          </label>
+              <div className="selected-file-info">
+                <strong>{selectedFile.name}</strong>
+
+                <span>
+                  {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
+                </span>
+              </div>
+
+              <button
+                type="button"
+                className="remove-image-btn"
+                onClick={removeImage}
+              >
+                {t("removeImage")}
+              </button>
+            </div>
+          )}
         </section>
 
         <div className="form-actions">
           <button
             type="button"
             className="secondary-btn"
-            onClick={() =>
-              navigate("/citizen/dashboard")
-            }
+            onClick={() => navigate("/citizen/dashboard")}
           >
             {t("cancel")}
           </button>

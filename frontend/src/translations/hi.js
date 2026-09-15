@@ -144,6 +144,17 @@ fullNamePlaceholder: "अपना पूरा नाम दर्ज करे
 mobileNumber: "मोबाइल नंबर",
 createPasswordPlaceholder: "पासवर्ड बनाएँ",
 alreadyHaveAccount: "पहले से खाता है?",
+
+// Complaint Evidence
+required: "आवश्यक",
+evidenceDescription:
+  "समस्या को स्पष्ट रूप से दिखाने वाली फोटो अपलोड करें। इससे संबंधित विभाग को शिकायत सत्यापित करने में मदद मिलेगी।",
+evidencePreview: "साक्ष्य पूर्वावलोकन",
+removeImage: "फोटो हटाएँ",
+invalidImageType: "केवल JPG या PNG तस्वीरें अपलोड करें।",
+imageTooLarge: "तस्वीर का आकार 10 MB से कम होना चाहिए।",
+evidenceRequired: "शिकायत जमा करने से पहले साक्ष्य फोटो अपलोड करें।",
+complaintSubmittedSuccess: "शिकायत सफलतापूर्वक जमा हो गई!",
 };
 
 export default hi;
