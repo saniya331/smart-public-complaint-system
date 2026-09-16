@@ -155,6 +155,39 @@ invalidImageType: "केवल JPG या PNG तस्वीरें अप�
 imageTooLarge: "तस्वीर का आकार 10 MB से कम होना चाहिए।",
 evidenceRequired: "शिकायत जमा करने से पहले साक्ष्य फोटो अपलोड करें।",
 complaintSubmittedSuccess: "शिकायत सफलतापूर्वक जमा हो गई!",
+
+// Notifications
+notificationsDescription:
+  "अपनी शिकायतों की प्रगति की नवीनतम जानकारी प्राप्त करें।",
+notificationSubmittedTitle: "शिकायत जमा की गई",
+notificationSubmittedMessage:
+  "आपकी शिकायत सफलतापूर्वक जमा हो गई है।",
+notificationAssignedTitle: "शिकायत सौंपी गई",
+notificationAssignedMessage:
+  "आपकी शिकायत जिम्मेदार अधिकारी को सौंप दी गई है।",
+notificationProgressTitle: "शिकायत पर काम चल रहा है",
+notificationProgressMessage:
+  "संबंधित विभाग वर्तमान में आपकी शिकायत पर काम कर रहा है।",
+notificationResolvedTitle: "शिकायत का समाधान हो गया",
+notificationResolvedMessage:
+  "आपकी शिकायत का सफलतापूर्वक समाधान हो गया है।",
+
+  // Feedback
+feedback: "प्रतिक्रिया",
+feedbackUnavailable: "प्रतिक्रिया उपलब्ध नहीं है",
+feedbackOnlyResolved:
+  "आप शिकायत का समाधान होने के बाद ही प्रतिक्रिया दे सकते हैं।",
+rateExperience: "अपने अनुभव को रेट करें",
+feedbackDescription:
+  "शिकायत समाधान प्रक्रिया के साथ अपने अनुभव के बारे में हमें बताएं।",
+yourFeedback: "आपकी प्रतिक्रिया",
+feedbackPlaceholder:
+  "अपना अनुभव या सुझाव साझा करें...",
+submitFeedback: "प्रतिक्रिया जमा करें",
+feedbackSubmitted: "प्रतिक्रिया जमा हो गई",
+feedbackThankYou:
+  "हमारी सार्वजनिक सेवाओं को बेहतर बनाने में मदद करने के लिए धन्यवाद।",
+stars: "सितारे",
 };
 
 export default hi;

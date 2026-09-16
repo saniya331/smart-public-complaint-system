@@ -45,11 +45,7 @@ function ComplaintDetails() {
             {t("myComplaints")}
           </Link>
 
-          <Link to="/citizen/complaints">
-            {t("trackComplaint")}
-          </Link>
-
-          <Link to="/citizen/complaints">
+          <Link to="/citizen/notifications">
             {t("notifications")}
           </Link>
         </nav>
@@ -118,9 +114,7 @@ function ComplaintDetails() {
                 <div>
                   <h3>{t("complaintSubmitted")}</h3>
 
-                  <p>
-                    {t("submittedMessage")}
-                  </p>
+                  <p>{t("submittedMessage")}</p>
                 </div>
               </div>
 
@@ -138,9 +132,7 @@ function ComplaintDetails() {
                 <div>
                   <h3>{t("complaintAssigned")}</h3>
 
-                  <p>
-                    {t("assignedMessage")}
-                  </p>
+                  <p>{t("assignedMessage")}</p>
                 </div>
               </div>
 
@@ -162,9 +154,7 @@ function ComplaintDetails() {
                 <div>
                   <h3>{t("workInProgress")}</h3>
 
-                  <p>
-                    {t("progressMessage")}
-                  </p>
+                  <p>{t("progressMessage")}</p>
                 </div>
               </div>
 
@@ -182,14 +172,23 @@ function ComplaintDetails() {
                 <div>
                   <h3>{t("complaintResolved")}</h3>
 
-                  <p>
-                    {t("resolvedMessage")}
-                  </p>
+                  <p>{t("resolvedMessage")}</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
+        {complaint.status === "Resolved" && (
+          <div className="details-feedback-action">
+            <Link
+              to={`/citizen/feedback/${complaint.id}`}
+              className="primary-btn"
+            >
+              {t("feedback")} →
+            </Link>
+          </div>
+        )}
       </section>
     </main>
   );

@@ -155,6 +155,39 @@ invalidImageType: "Please upload only JPG or PNG images.",
 imageTooLarge: "Image size must be less than 10 MB.",
 evidenceRequired: "Please upload complaint evidence before submitting.",
 complaintSubmittedSuccess: "Complaint submitted successfully!",
+
+// Notifications
+notificationsDescription:
+  "Stay updated on the progress of your complaints.",
+notificationSubmittedTitle: "Complaint submitted",
+notificationSubmittedMessage:
+  "Your complaint has been successfully submitted.",
+notificationAssignedTitle: "Complaint assigned",
+notificationAssignedMessage:
+  "Your complaint has been assigned to the responsible officer.",
+notificationProgressTitle: "Complaint in progress",
+notificationProgressMessage:
+  "The responsible department is currently working on your complaint.",
+notificationResolvedTitle: "Complaint resolved",
+notificationResolvedMessage:
+  "Your complaint has been resolved successfully.",
+
+  // Feedback
+feedback: "Feedback",
+feedbackUnavailable: "Feedback unavailable",
+feedbackOnlyResolved:
+  "You can provide feedback only after your complaint has been resolved.",
+rateExperience: "Rate your experience",
+feedbackDescription:
+  "Tell us about your experience with the complaint resolution process.",
+yourFeedback: "Your feedback",
+feedbackPlaceholder:
+  "Share your experience or suggestions...",
+submitFeedback: "Submit Feedback",
+feedbackSubmitted: "Feedback submitted",
+feedbackThankYou:
+  "Thank you for helping us improve our public services.",
+stars: "stars",
 };
 
 export default en;

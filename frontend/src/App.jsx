@@ -9,6 +9,9 @@ import CitizenDashboard from "./pages/citizen/CitizenDashboard";
 import SubmitComplaint from "./pages/citizen/SubmitComplaint";
 import MyComplaints from "./pages/citizen/MyComplaints";
 import ComplaintDetails from "./pages/citizen/ComplaintDetails";
+import TrackComplaint from "./pages/citizen/TrackComplaint";
+import Notifications from "./pages/citizen/Notifications";
+import Feedback from "./pages/citizen/Feedback";
 
 function App() {
   return (
@@ -40,6 +43,21 @@ function App() {
             <Route
               path="/citizen/complaints/:id"
               element={<ComplaintDetails />}
+            />
+
+            <Route
+              path="/citizen/track/:id"
+              element={<TrackComplaint />}
+            />
+
+            <Route
+              path="/citizen/notifications"
+              element={<Notifications />}
+            />
+
+            <Route
+              path="/citizen/feedback/:id"
+              element={<Feedback />}
             />
           </Routes>
         </BrowserRouter>

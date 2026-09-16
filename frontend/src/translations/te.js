@@ -156,6 +156,39 @@ invalidImageType: "JPG లేదా PNG చిత్రాలను మాత్
 imageTooLarge: "చిత్ర పరిమాణం 10 MB కంటే తక్కువగా ఉండాలి.",
 evidenceRequired: "ఫిర్యాదును సమర్పించే ముందు సాక్ష్య చిత్రాన్ని అప్‌లోడ్ చేయండి.",
 complaintSubmittedSuccess: "ఫిర్యాదు విజయవంతంగా సమర్పించబడింది!",
+
+// Notifications
+notificationsDescription:
+  "మీ ఫిర్యాదుల పురోగతికి సంబంధించిన తాజా సమాచారాన్ని పొందండి.",
+notificationSubmittedTitle: "ఫిర్యాదు సమర్పించబడింది",
+notificationSubmittedMessage:
+  "మీ ఫిర్యాదు విజయవంతంగా సమర్పించబడింది.",
+notificationAssignedTitle: "ఫిర్యాదు కేటాయించబడింది",
+notificationAssignedMessage:
+  "మీ ఫిర్యాదు బాధ్యతగల అధికారికి కేటాయించబడింది.",
+notificationProgressTitle: "ఫిర్యాదుపై పని జరుగుతోంది",
+notificationProgressMessage:
+  "బాధ్యతగల విభాగం ప్రస్తుతం మీ ఫిర్యాదుపై పని చేస్తోంది.",
+notificationResolvedTitle: "ఫిర్యాదు పరిష్కరించబడింది",
+notificationResolvedMessage:
+  "మీ ఫిర్యాదు విజయవంతంగా పరిష్కరించబడింది.",
+
+  // Feedback
+feedback: "అభిప్రాయం",
+feedbackUnavailable: "అభిప్రాయం అందుబాటులో లేదు",
+feedbackOnlyResolved:
+  "మీ ఫిర్యాదు పరిష్కరించబడిన తర్వాత మాత్రమే అభిప్రాయాన్ని ఇవ్వవచ్చు.",
+rateExperience: "మీ అనుభవానికి రేటింగ్ ఇవ్వండి",
+feedbackDescription:
+  "ఫిర్యాదు పరిష్కార ప్రక్రియలో మీ అనుభవం గురించి మాకు తెలియజేయండి.",
+yourFeedback: "మీ అభిప్రాయం",
+feedbackPlaceholder:
+  "మీ అనుభవం లేదా సూచనలను పంచుకోండి...",
+submitFeedback: "అభిప్రాయాన్ని సమర్పించండి",
+feedbackSubmitted: "అభిప్రాయం సమర్పించబడింది",
+feedbackThankYou:
+  "మా ప్రజా సేవలను మెరుగుపరచడంలో సహాయపడినందుకు ధన్యవాదాలు.",
+stars: "నక్షత్రాలు",
 };
 
 export default te;

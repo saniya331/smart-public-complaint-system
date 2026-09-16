@@ -1139,3 +1139,156 @@ a.login-btn {
 .remove-image-btn:hover {
   background: #f3effb;
 }
+
+.complaint-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.track-complaint-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border: 1px solid #ddd8ea;
+  border-radius: 8px;
+  background: #fff;
+  color: #5b34c4;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.track-complaint-btn:hover {
+  background: #f3effb;
+  border-color: #cfc4e8;
+}
+
+/* Feedback */
+
+.feedback-card {
+  max-width: 100%;
+}
+
+.feedback-card form {
+  max-width: 700px;
+}
+
+.feedback-card form h2 {
+  margin-bottom: 10px;
+}
+
+.feedback-card form > p {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.star {
+  border: none;
+  background: transparent;
+  color: #d6d0df;
+  font-size: 32px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.star:hover,
+.star.selected {
+  color: #f4b400;
+  transform: scale(1.08);
+}
+
+.feedback-card form > label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.feedback-card textarea {
+  width: 100%;
+  min-height: 130px;
+  margin-bottom: 20px;
+  padding: 14px;
+  border: 1px solid #ddd8ea;
+  border-radius: 10px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.feedback-card textarea:focus {
+  border-color: #7557ca;
+}
+
+.feedback-card .primary-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.feedback-unavailable {
+  max-width: 700px;
+}
+
+.feedback-unavailable h1 {
+  margin-bottom: 10px;
+}
+
+.feedback-unavailable p {
+  margin-bottom: 18px;
+  color: #666;
+}
+
+.feedback-success {
+  text-align: center;
+  padding: 35px 20px;
+}
+
+.feedback-success > div {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.feedback-success h2 {
+  margin-bottom: 10px;
+}
+
+.feedback-success p {
+  margin-bottom: 22px;
+  color: #666;
+}
+
+.feedback-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 14px;
+  border: 1px solid #ddd8ea;
+  border-radius: 8px;
+  background: #fff;
+  color: #5b34c4;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.feedback-btn:hover {
+  background: #f3effb;
+  border-color: #cfc4e8;
+}
+
+.details-feedback-action {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}

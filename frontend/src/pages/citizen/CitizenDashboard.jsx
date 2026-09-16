@@ -35,11 +35,9 @@ function CitizenDashboard() {
             {t("myComplaints")}
           </Link>
 
-          <Link to="/citizen/complaints">
-            {t("trackComplaint")}
-          </Link>
+          
 
-          <Link to="/citizen/complaints">
+          <Link to="/citizen/notifications">
             {t("notifications")}
           </Link>
         </nav>

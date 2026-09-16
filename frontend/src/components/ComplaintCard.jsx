@@ -45,12 +45,30 @@ function ComplaintCard({ complaint }) {
         </div>
       </div>
 
-      <Link
-        to={`/citizen/complaints/${complaint.id}`}
-        className="view-complaint-btn"
-      >
-        {t("viewDetails")} →
-      </Link>
+      <div className="complaint-card-actions">
+  <Link
+    to={`/citizen/complaints/${complaint.id}`}
+    className="view-complaint-btn"
+  >
+    {t("viewDetails")} →
+  </Link>
+
+  <Link
+    to={`/citizen/track/${complaint.id}`}
+    className="track-complaint-btn"
+  >
+    {t("trackComplaint")} →
+  </Link>
+
+  {complaint.status === "Resolved" && (
+    <Link
+      to={`/citizen/feedback/${complaint.id}`}
+      className="feedback-btn"
+    >
+      {t("feedback")} →
+    </Link>
+  )}
+</div>
     </article>
   );
 }
