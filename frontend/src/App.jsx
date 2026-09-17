@@ -12,6 +12,9 @@ import ComplaintDetails from "./pages/citizen/ComplaintDetails";
 import TrackComplaint from "./pages/citizen/TrackComplaint";
 import Notifications from "./pages/citizen/Notifications";
 import Feedback from "./pages/citizen/Feedback";
+import OfficerDashboard from "./pages/officer/OfficerDashboard";
+import AssignedComplaints from "./pages/officer/AssignedComplaints";
+import OfficerComplaintDetails from "./pages/officer/OfficerComplaintDetails";
 
 function App() {
   return (
@@ -59,6 +62,20 @@ function App() {
               path="/citizen/feedback/:id"
               element={<Feedback />}
             />
+            <Route
+  path="/officer/dashboard"
+  element={<OfficerDashboard />}
+/>
+
+<Route
+  path="/officer/complaints"
+  element={<AssignedComplaints />}
+/>
+
+<Route
+  path="/officer/complaints/:id"
+  element={<OfficerComplaintDetails />}
+/>
           </Routes>
         </BrowserRouter>
       </ComplaintProvider>
