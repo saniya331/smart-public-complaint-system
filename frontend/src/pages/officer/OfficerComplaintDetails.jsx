@@ -1,7 +1,14 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 function OfficerComplaintDetails() {
   const { id } = useParams();
+
+  const [status, setStatus] = useState("In Progress");
+  const [remarks, setRemarks] = useState("");
+  const [resolutionProof, setResolutionProof] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
+  const [message, setMessage] = useState("");
 
   const complaint = {
     id,
@@ -11,11 +18,51 @@ function OfficerComplaintDetails() {
     mandal: "Miyapur",
     location: "Near community library, Miyapur",
     date: "20 Aug 2026",
-    status: "In Progress",
     description:
       "The streetlight near the community library has not been working for several days. The area becomes very dark at night and residents are facing difficulty.",
     citizenName: "Citizen",
   };
+
+  function handleProofChange(event) {
+    const file = event.target.files[0];
+
+    if (!file) {
+      return;
+    }
+
+    if (!["image/jpeg", "image/png"].includes(file.type)) {
+      setMessage("Please upload only JPG or PNG images.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      setMessage("Image size must be less than 10 MB.");
+      event.target.value = "";
+      return;
+    }
+
+    setResolutionProof(file);
+    setPreviewUrl(URL.createObjectURL(file));
+    setMessage("");
+  }
+
+  function removeProof() {
+    setResolutionProof(null);
+    setPreviewUrl("");
+    setMessage("");
+  }
+
+  function handleStatusUpdate(event) {
+    event.preventDefault();
+
+    if (status === "Resolved" && !resolutionProof) {
+      setMessage("Please upload resolution proof before resolving the complaint.");
+      return;
+    }
+
+    setMessage("Complaint status updated successfully.");
+  }
 
   return (
     <main className="dashboard-page">
@@ -62,11 +109,11 @@ function OfficerComplaintDetails() {
           </div>
 
           <span
-            className={`status-badge ${complaint.status
+            className={`status-badge ${status
               .toLowerCase()
               .replace(/\s+/g, "-")}`}
           >
-            {complaint.status}
+            {status}
           </span>
         </header>
 
@@ -117,20 +164,96 @@ function OfficerComplaintDetails() {
         <section className="details-card officer-action-card">
           <h2>Complaint Action</h2>
 
-          <p>
-            Status update and resolution proof upload will be
-            connected to the backend later.
-          </p>
+          <form onSubmit={handleStatusUpdate}>
+            <label className="officer-form-label">
+              Complaint Status
+            </label>
 
-          <div className="officer-actions">
-            <button type="button" className="primary-btn">
-              Update Status
-            </button>
+            <select
+              className="officer-status-select"
+              value={status}
+              onChange={(event) => {
+                setStatus(event.target.value);
+                setMessage("");
+              }}
+            >
+              <option value="Assigned">Assigned</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+            </select>
 
-            <button type="button" className="secondary-btn">
-              Upload Resolution Proof
+            <label className="officer-form-label">
+              Officer Remarks
+            </label>
+
+            <textarea
+              className="officer-remarks"
+              value={remarks}
+              onChange={(event) => setRemarks(event.target.value)}
+              placeholder="Add remarks about the action taken..."
+              rows="5"
+            />
+
+            <label className="officer-form-label">
+              Resolution Proof
+              {status === "Resolved" && (
+                <span className="required-mark"> *</span>
+              )}
+            </label>
+
+            <p className="officer-proof-description">
+              Upload a clear image showing that the complaint has
+              been resolved. JPG or PNG, maximum size 10 MB.
+            </p>
+
+            <label className="officer-upload-btn">
+              ＋ Upload resolution proof
+              <input
+                type="file"
+                accept="image/jpeg,image/png"
+                onChange={handleProofChange}
+                hidden
+              />
+            </label>
+
+            {resolutionProof && previewUrl && (
+              <div className="resolution-preview-container">
+                <img
+                  src={previewUrl}
+                  alt="Resolution proof preview"
+                  className="resolution-preview"
+                />
+
+                <div className="selected-file-info">
+                  <strong>{resolutionProof.name}</strong>
+                  <span>
+                    {(resolutionProof.size / (1024 * 1024)).toFixed(2)} MB
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  className="remove-image-btn"
+                  onClick={removeProof}
+                >
+                  Remove image
+                </button>
+              </div>
+            )}
+
+            {message && (
+              <p className="officer-action-message">
+                {message}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              className="primary-btn officer-update-btn"
+            >
+              Update Complaint
             </button>
-          </div>
+          </form>
         </section>
       </section>
     </main>
