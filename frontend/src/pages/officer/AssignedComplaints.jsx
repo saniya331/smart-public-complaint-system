@@ -8,7 +8,9 @@ function AssignedComplaints() {
       category: "Electricity",
       location: "Miyapur, Hyderabad",
       status: "In Progress",
+      priority: "High",
       date: "20 Aug 2026",
+      assignedDate: "21 Aug 2026",
     },
     {
       id: "GRV-2026-1049",
@@ -16,7 +18,9 @@ function AssignedComplaints() {
       category: "Sanitation",
       location: "Gachibowli, Hyderabad",
       status: "Assigned",
+      priority: "Medium",
       date: "21 Aug 2026",
+      assignedDate: "22 Aug 2026",
     },
     {
       id: "GRV-2026-1050",
@@ -24,7 +28,9 @@ function AssignedComplaints() {
       category: "Roads & Transport",
       location: "Kukatpally, Hyderabad",
       status: "Assigned",
+      priority: "High",
       date: "22 Aug 2026",
+      assignedDate: "23 Aug 2026",
     },
   ];
 
@@ -36,9 +42,7 @@ function AssignedComplaints() {
         </h2>
 
         <nav>
-          <Link to="/officer/dashboard">
-            Dashboard
-          </Link>
+          <Link to="/officer/dashboard">Dashboard</Link>
 
           <Link
             to="/officer/complaints"
@@ -57,50 +61,93 @@ function AssignedComplaints() {
         <header className="dashboard-header">
           <div>
             <p>Officer Portal / Assigned Complaints</p>
+
             <h1>Assigned Complaints</h1>
+
             <span>
-              View and manage complaints assigned to you.
+              Review and manage complaints assigned to you.
             </span>
           </div>
         </header>
 
-        <section className="complaints-list">
-          {complaints.map((complaint) => (
-            <article className="complaint-card" key={complaint.id}>
-              <div className="complaint-card-top">
-                <div>
-                  <span className="complaint-id">
-                    {complaint.id}
-                  </span>
+        <section className="officer-complaint-list">
+          {complaints.length > 0 ? (
+            complaints.map((complaint) => (
+              <article
+                className="officer-complaint-card"
+                key={complaint.id}
+              >
+                <div className="officer-card-header">
+                  <div>
+                    <span className="complaint-id">
+                      {complaint.id}
+                    </span>
 
-                  <h3>{complaint.title}</h3>
+                    <h3>{complaint.title}</h3>
 
-                  <p>
-                    {complaint.category} · {complaint.location}
-                  </p>
+                    <p>
+                      {complaint.category} ·{" "}
+                      {complaint.location}
+                    </p>
+                  </div>
+
+                  <div className="officer-card-badges">
+                    <span
+                      className={`priority-badge ${complaint.priority.toLowerCase()}`}
+                    >
+                      {complaint.priority} Priority
+                    </span>
+
+                    <span
+                      className={`status-badge ${complaint.status
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`}
+                    >
+                      {complaint.status}
+                    </span>
+                  </div>
                 </div>
 
-                <span
-                  className={`status-badge ${complaint.status
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}`}
-                >
-                  {complaint.status}
-                </span>
-              </div>
+                <div className="officer-card-info">
+                  <div>
+                    <span>Submitted</span>
+                    <strong>{complaint.date}</strong>
+                  </div>
 
-              <div className="complaint-card-bottom">
-                <span>Submitted: {complaint.date}</span>
+                  <div>
+                    <span>Assigned</span>
+                    <strong>{complaint.assignedDate}</strong>
+                  </div>
 
-                <Link
-                  to={`/officer/complaints/${complaint.id}`}
-                  className="view-complaint-btn"
-                >
-                  View details →
-                </Link>
-              </div>
-            </article>
-          ))}
+                  <div>
+                    <span>Category</span>
+                    <strong>{complaint.category}</strong>
+                  </div>
+                </div>
+
+                <div className="officer-card-footer">
+                  <span>
+                    Action required based on current complaint status.
+                  </span>
+
+                  <Link
+                    to={`/officer/complaints/${complaint.id}`}
+                    className="view-complaint-btn"
+                  >
+                    Manage complaint →
+                  </Link>
+                </div>
+              </article>
+            ))
+          ) : (
+            <div className="officer-empty-state">
+              <h2>No assigned complaints</h2>
+
+              <p>
+                There are currently no complaints assigned to you.
+              </p>
+            </div>
+          )}
         </section>
       </section>
     </main>
