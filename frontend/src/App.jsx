@@ -15,6 +15,10 @@ import Feedback from "./pages/citizen/Feedback";
 import OfficerDashboard from "./pages/officer/OfficerDashboard";
 import AssignedComplaints from "./pages/officer/AssignedComplaints";
 import OfficerComplaintDetails from "./pages/officer/OfficerComplaintDetails";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import ManageUsers from "./pages/admin/ManageUsers";
+import ManageOfficers from "./pages/admin/ManageOfficers";
+import ManageDepartments from "./pages/admin/ManageDepartments";
 
 function App() {
   return (
@@ -75,6 +79,25 @@ function App() {
 <Route
   path="/officer/complaints/:id"
   element={<OfficerComplaintDetails />}
+/>
+<Route
+  path="/admin/dashboard"
+  element={<AdminDashboard />}
+/>
+
+<Route
+  path="/admin/users"
+  element={<ManageUsers />}
+/>
+
+<Route
+  path="/admin/officers"
+  element={<ManageOfficers />}
+/>
+
+<Route
+  path="/admin/departments"
+  element={<ManageDepartments />}
 />
           </Routes>
         </BrowserRouter>

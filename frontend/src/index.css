@@ -1697,3 +1697,138 @@ a.login-btn {
     align-items: flex-start;
   }
 }
+
+/* Day 19 - Admin Module */
+
+.admin-management-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-management-card {
+  display: block;
+  background: white;
+  border: 1px solid #e5e1ed;
+  border-radius: 14px;
+  padding: 22px;
+  text-decoration: none;
+  color: inherit;
+  box-sizing: border-box;
+  transition: 0.2s ease;
+}
+
+.admin-management-card:hover {
+  border-color: #cfc4e8;
+  transform: translateY(-2px);
+}
+
+.admin-management-card h3 {
+  margin: 10px 0 8px;
+  color: #252238;
+  font-size: 18px;
+}
+
+.admin-management-card p {
+  margin: 0;
+  color: #6b6875;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.admin-management-card > span:last-child {
+  display: block;
+  margin-top: 18px;
+  color: #5b34c4;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.admin-table-card {
+  background: white;
+  border: 1px solid #e5e1ed;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.admin-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 16px 18px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.admin-table th {
+  background: #faf9fc;
+  color: #555;
+  font-weight: 600;
+}
+
+.admin-table td {
+  color: #333;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-status {
+  display: inline-flex;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-status.active {
+  background: #eef8f1;
+  color: #287a45;
+}
+
+.department-info {
+  display: flex;
+  gap: 35px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.department-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.department-info span {
+  font-size: 12px;
+  color: #777;
+}
+
+.department-info strong {
+  font-size: 20px;
+  color: #333;
+}
+
+@media (max-width: 900px) {
+  .admin-management-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-management-grid {
+    grid-template-columns: 1fr;
+  }
+}
