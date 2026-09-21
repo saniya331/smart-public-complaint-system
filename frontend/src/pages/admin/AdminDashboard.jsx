@@ -28,7 +28,10 @@ function AdminDashboard() {
         </h2>
 
         <nav>
-          <Link to="/admin/dashboard" className="active-menu">
+          <Link
+            to="/admin/dashboard"
+            className="active-menu"
+          >
             Dashboard
           </Link>
 
@@ -42,6 +45,18 @@ function AdminDashboard() {
 
           <Link to="/admin/departments">
             Departments
+          </Link>
+
+          <Link to="/admin/districts">
+            Districts
+          </Link>
+
+          <Link to="/admin/mandals">
+            Mandals
+          </Link>
+
+          <Link to="/admin/categories">
+            Categories
           </Link>
         </nav>
 
@@ -58,7 +73,8 @@ function AdminDashboard() {
             <h1>Admin Dashboard</h1>
 
             <span>
-              Manage users, officers, departments, and complaints.
+              Manage users, officers, departments, locations,
+              and complaint categories.
             </span>
           </div>
         </header>
@@ -76,6 +92,7 @@ function AdminDashboard() {
           <div className="section-heading">
             <div>
               <h2>Administration</h2>
+
               <p>
                 Manage the main resources of the grievance portal.
               </p>
@@ -83,34 +100,100 @@ function AdminDashboard() {
           </div>
 
           <div className="admin-management-grid">
-            <Link to="/admin/users" className="admin-management-card">
+            {/* Users */}
+            <Link
+              to="/admin/users"
+              className="admin-management-card"
+            >
               <h3>Users</h3>
+
               <p>
                 View and manage registered citizens.
               </p>
-              <span>Manage users →</span>
+
+              <span>
+                Manage users →
+              </span>
             </Link>
 
+            {/* Officers */}
             <Link
               to="/admin/officers"
               className="admin-management-card"
             >
               <h3>Officers</h3>
+
               <p>
                 View and manage complaint officers.
               </p>
-              <span>Manage officers →</span>
+
+              <span>
+                Manage officers →
+              </span>
             </Link>
 
+            {/* Departments */}
             <Link
               to="/admin/departments"
               className="admin-management-card"
             >
               <h3>Departments</h3>
+
               <p>
                 Manage departments responsible for complaints.
               </p>
-              <span>Manage departments →</span>
+
+              <span>
+                Manage departments →
+              </span>
+            </Link>
+
+            {/* Districts */}
+            <Link
+              to="/admin/districts"
+              className="admin-management-card"
+            >
+              <h3>Districts</h3>
+
+              <p>
+                Manage districts covered by the grievance system.
+              </p>
+
+              <span>
+                Manage districts →
+              </span>
+            </Link>
+
+            {/* Mandals */}
+            <Link
+              to="/admin/mandals"
+              className="admin-management-card"
+            >
+              <h3>Mandals</h3>
+
+              <p>
+                Manage mandals and their officer assignments.
+              </p>
+
+              <span>
+                Manage mandals →
+              </span>
+            </Link>
+
+            {/* Complaint Categories */}
+            <Link
+              to="/admin/categories"
+              className="admin-management-card"
+            >
+              <h3>Complaint Categories</h3>
+
+              <p>
+                Manage categories used to classify complaints.
+              </p>
+
+              <span>
+                Manage categories →
+              </span>
             </Link>
           </div>
         </section>

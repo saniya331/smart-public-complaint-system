@@ -19,6 +19,9 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import ManageUsers from "./pages/admin/ManageUsers";
 import ManageOfficers from "./pages/admin/ManageOfficers";
 import ManageDepartments from "./pages/admin/ManageDepartments";
+import ManageDistricts from "./pages/admin/ManageDistricts";
+import ManageMandals from "./pages/admin/ManageMandals";
+import ManageCategories from "./pages/admin/ManageCategories";
 
 function App() {
   return (
@@ -98,6 +101,20 @@ function App() {
 <Route
   path="/admin/departments"
   element={<ManageDepartments />}
+/>
+<Route
+  path="/admin/districts"
+  element={<ManageDistricts />}
+/>
+
+<Route
+  path="/admin/mandals"
+  element={<ManageMandals />}
+/>
+
+<Route
+  path="/admin/categories"
+  element={<ManageCategories />}
 />
           </Routes>
         </BrowserRouter>
