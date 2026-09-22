@@ -36,17 +36,36 @@ function ManageDepartments() {
         </h2>
 
         <nav>
-          <Link to="/admin/dashboard">Dashboard</Link>
+          <Link to="/admin/dashboard">
+            Dashboard
+          </Link>
 
-          <Link to="/admin/users">Users</Link>
+          <Link to="/admin/users">
+            Users
+          </Link>
 
-          <Link to="/admin/officers">Officers</Link>
+          <Link to="/admin/officers">
+            Officers
+          </Link>
 
-          <Link
-            to="/admin/departments"
-            className="active-menu"
-          >
+          <Link to="/admin/departments" className="active-menu">
             Departments
+          </Link>
+
+          <Link to="/admin/districts">
+            Districts
+          </Link>
+
+          <Link to="/admin/mandals">
+            Mandals
+          </Link>
+
+          <Link to="/admin/categories">
+            Categories
+          </Link>
+
+          <Link to="/admin/complaints">
+            Complaints
           </Link>
         </nav>
 

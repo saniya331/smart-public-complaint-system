@@ -47,20 +47,37 @@ function ManageMandals() {
         </h2>
 
         <nav>
-          <Link to="/admin/dashboard">Dashboard</Link>
-          <Link to="/admin/users">Users</Link>
-          <Link to="/admin/officers">Officers</Link>
-          <Link to="/admin/departments">Departments</Link>
-          <Link to="/admin/districts">Districts</Link>
+          <Link to="/admin/dashboard">
+            Dashboard
+          </Link>
 
-          <Link
-            to="/admin/mandals"
-            className="active-menu"
-          >
+          <Link to="/admin/users">
+            Users
+          </Link>
+
+          <Link to="/admin/officers">
+            Officers
+          </Link>
+
+          <Link to="/admin/departments">
+            Departments
+          </Link>
+
+          <Link to="/admin/districts">
+            Districts
+          </Link>
+
+          <Link to="/admin/mandals" className="active-menu">
             Mandals
           </Link>
 
-          <Link to="/admin/categories">Categories</Link>
+          <Link to="/admin/categories">
+            Categories
+          </Link>
+
+          <Link to="/admin/complaints">
+            Complaints
+          </Link>
         </nav>
 
         <Link className="logout-link" to="/">
@@ -98,9 +115,13 @@ function ManageMandals() {
                 {mandals.map((mandal) => (
                   <tr key={mandal.id}>
                     <td>{mandal.id}</td>
+
                     <td>{mandal.name}</td>
+
                     <td>{mandal.district}</td>
+
                     <td>{mandal.officers}</td>
+
                     <td>
                       <span className="admin-status active">
                         {mandal.status}

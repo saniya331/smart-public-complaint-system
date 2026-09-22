@@ -1832,3 +1832,127 @@ a.login-btn {
     grid-template-columns: 1fr;
   }
 }
+
+/* Day 21 - Admin Complaint Management */
+
+.admin-complaints-table {
+  min-width: 1250px;
+}
+
+.admin-complaints-table th,
+.admin-complaints-table td {
+  vertical-align: middle;
+}
+
+.admin-complaint-title {
+  display: block;
+  min-width: 150px;
+  color: #333;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.admin-complaints-table .priority-badge {
+  white-space: nowrap;
+}
+
+.admin-complaints-table .status-badge {
+  white-space: nowrap;
+}
+
+.admin-complaints-table .view-complaint-btn {
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* Day 21 - Admin Complaint Details */
+
+.admin-details-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.admin-description-card,
+.admin-assignment-card,
+.admin-remarks-card,
+.admin-proof-card {
+  margin-top: 20px;
+}
+
+.admin-assignment-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.admin-assignment-grid div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 15px;
+  background: #faf9fc;
+  border-radius: 10px;
+}
+
+.admin-assignment-grid span {
+  font-size: 12px;
+  color: #777;
+}
+
+.admin-assignment-grid strong {
+  font-size: 14px;
+  color: #333;
+}
+
+.admin-proof-empty {
+  padding: 20px;
+  border: 1px dashed #d8d2e3;
+  border-radius: 10px;
+  background: #faf9fc;
+}
+
+.admin-proof-empty strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+.admin-proof-empty p {
+  margin: 0;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.admin-resolution-proof {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e2deea;
+}
+
+@media (max-width: 850px) {
+  .admin-assignment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-details-badges {
+    justify-content: flex-start;
+  }
+
+  .admin-assignment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-resolution-proof {
+    max-width: 100%;
+  }
+}

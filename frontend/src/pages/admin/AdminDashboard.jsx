@@ -2,22 +2,10 @@ import { Link } from "react-router-dom";
 
 function AdminDashboard() {
   const stats = [
-    {
-      label: "Total Users",
-      value: 248,
-    },
-    {
-      label: "Total Officers",
-      value: 32,
-    },
-    {
-      label: "Departments",
-      value: 8,
-    },
-    {
-      label: "Total Complaints",
-      value: 1248,
-    },
+    { label: "Total Users", value: 248 },
+    { label: "Total Officers", value: 32 },
+    { label: "Departments", value: 8 },
+    { label: "Total Complaints", value: 1248 },
   ];
 
   return (
@@ -28,36 +16,23 @@ function AdminDashboard() {
         </h2>
 
         <nav>
-          <Link
-            to="/admin/dashboard"
-            className="active-menu"
-          >
+          <Link to="/admin/dashboard" className="active-menu">
             Dashboard
           </Link>
 
-          <Link to="/admin/users">
-            Users
-          </Link>
+          <Link to="/admin/users">Users</Link>
 
-          <Link to="/admin/officers">
-            Officers
-          </Link>
+          <Link to="/admin/officers">Officers</Link>
 
-          <Link to="/admin/departments">
-            Departments
-          </Link>
+          <Link to="/admin/departments">Departments</Link>
 
-          <Link to="/admin/districts">
-            Districts
-          </Link>
+          <Link to="/admin/districts">Districts</Link>
 
-          <Link to="/admin/mandals">
-            Mandals
-          </Link>
+          <Link to="/admin/mandals">Mandals</Link>
 
-          <Link to="/admin/categories">
-            Categories
-          </Link>
+          <Link to="/admin/categories">Categories</Link>
+
+          <Link to="/admin/complaints">Complaints</Link>
         </nav>
 
         <Link className="logout-link" to="/">
@@ -74,7 +49,7 @@ function AdminDashboard() {
 
             <span>
               Manage users, officers, departments, locations,
-              and complaint categories.
+              complaints, and complaint categories.
             </span>
           </div>
         </header>
@@ -100,7 +75,6 @@ function AdminDashboard() {
           </div>
 
           <div className="admin-management-grid">
-            {/* Users */}
             <Link
               to="/admin/users"
               className="admin-management-card"
@@ -111,12 +85,9 @@ function AdminDashboard() {
                 View and manage registered citizens.
               </p>
 
-              <span>
-                Manage users →
-              </span>
+              <span>Manage users →</span>
             </Link>
 
-            {/* Officers */}
             <Link
               to="/admin/officers"
               className="admin-management-card"
@@ -127,12 +98,9 @@ function AdminDashboard() {
                 View and manage complaint officers.
               </p>
 
-              <span>
-                Manage officers →
-              </span>
+              <span>Manage officers →</span>
             </Link>
 
-            {/* Departments */}
             <Link
               to="/admin/departments"
               className="admin-management-card"
@@ -143,12 +111,9 @@ function AdminDashboard() {
                 Manage departments responsible for complaints.
               </p>
 
-              <span>
-                Manage departments →
-              </span>
+              <span>Manage departments →</span>
             </Link>
 
-            {/* Districts */}
             <Link
               to="/admin/districts"
               className="admin-management-card"
@@ -159,12 +124,9 @@ function AdminDashboard() {
                 Manage districts covered by the grievance system.
               </p>
 
-              <span>
-                Manage districts →
-              </span>
+              <span>Manage districts →</span>
             </Link>
 
-            {/* Mandals */}
             <Link
               to="/admin/mandals"
               className="admin-management-card"
@@ -175,12 +137,9 @@ function AdminDashboard() {
                 Manage mandals and their officer assignments.
               </p>
 
-              <span>
-                Manage mandals →
-              </span>
+              <span>Manage mandals →</span>
             </Link>
 
-            {/* Complaint Categories */}
             <Link
               to="/admin/categories"
               className="admin-management-card"
@@ -191,9 +150,20 @@ function AdminDashboard() {
                 Manage categories used to classify complaints.
               </p>
 
-              <span>
-                Manage categories →
-              </span>
+              <span>Manage categories →</span>
+            </Link>
+
+            <Link
+              to="/admin/complaints"
+              className="admin-management-card"
+            >
+              <h3>Complaints</h3>
+
+              <p>
+                Monitor and manage complaints submitted by citizens.
+              </p>
+
+              <span>Manage complaints →</span>
             </Link>
           </div>
         </section>

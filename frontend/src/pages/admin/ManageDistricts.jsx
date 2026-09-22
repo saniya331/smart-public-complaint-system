@@ -40,20 +40,37 @@ function ManageDistricts() {
         </h2>
 
         <nav>
-          <Link to="/admin/dashboard">Dashboard</Link>
-          <Link to="/admin/users">Users</Link>
-          <Link to="/admin/officers">Officers</Link>
-          <Link to="/admin/departments">Departments</Link>
+          <Link to="/admin/dashboard">
+            Dashboard
+          </Link>
 
-          <Link
-            to="/admin/districts"
-            className="active-menu"
-          >
+          <Link to="/admin/users">
+            Users
+          </Link>
+
+          <Link to="/admin/officers">
+            Officers
+          </Link>
+
+          <Link to="/admin/departments">
+            Departments
+          </Link>
+
+          <Link to="/admin/districts" className="active-menu">
             Districts
           </Link>
 
-          <Link to="/admin/mandals">Mandals</Link>
-          <Link to="/admin/categories">Categories</Link>
+          <Link to="/admin/mandals">
+            Mandals
+          </Link>
+
+          <Link to="/admin/categories">
+            Categories
+          </Link>
+
+          <Link to="/admin/complaints">
+            Complaints
+          </Link>
         </nav>
 
         <Link className="logout-link" to="/">
@@ -91,9 +108,13 @@ function ManageDistricts() {
                 {districts.map((district) => (
                   <tr key={district.id}>
                     <td>{district.id}</td>
+
                     <td>{district.name}</td>
+
                     <td>{district.mandals}</td>
+
                     <td>{district.officers}</td>
+
                     <td>
                       <span className="admin-status active">
                         {district.status}

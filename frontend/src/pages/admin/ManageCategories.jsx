@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 function ManageCategories() {
@@ -56,18 +55,22 @@ function ManageCategories() {
 
         <nav>
           <Link to="/admin/dashboard">Dashboard</Link>
+
           <Link to="/admin/users">Users</Link>
+
           <Link to="/admin/officers">Officers</Link>
+
           <Link to="/admin/departments">Departments</Link>
+
           <Link to="/admin/districts">Districts</Link>
+
           <Link to="/admin/mandals">Mandals</Link>
 
-          <Link
-            to="/admin/categories"
-            className="active-menu"
-          >
+          <Link to="/admin/categories" className="active-menu">
             Categories
           </Link>
+
+          <Link to="/admin/complaints">Complaints</Link>
         </nav>
 
         <Link className="logout-link" to="/">

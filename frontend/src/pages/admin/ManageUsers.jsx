@@ -33,15 +33,37 @@ function ManageUsers() {
         </h2>
 
         <nav>
-          <Link to="/admin/dashboard">Dashboard</Link>
+          <Link to="/admin/dashboard">
+            Dashboard
+          </Link>
 
           <Link to="/admin/users" className="active-menu">
             Users
           </Link>
 
-          <Link to="/admin/officers">Officers</Link>
+          <Link to="/admin/officers">
+            Officers
+          </Link>
 
-          <Link to="/admin/departments">Departments</Link>
+          <Link to="/admin/departments">
+            Departments
+          </Link>
+
+          <Link to="/admin/districts">
+            Districts
+          </Link>
+
+          <Link to="/admin/mandals">
+            Mandals
+          </Link>
+
+          <Link to="/admin/categories">
+            Categories
+          </Link>
+
+          <Link to="/admin/complaints">
+            Complaints
+          </Link>
         </nav>
 
         <Link className="logout-link" to="/">
@@ -79,9 +101,13 @@ function ManageUsers() {
                 {users.map((user) => (
                   <tr key={user.id}>
                     <td>{user.id}</td>
+
                     <td>{user.name}</td>
+
                     <td>{user.email}</td>
+
                     <td>{user.district}</td>
+
                     <td>
                       <span className="admin-status active">
                         {user.status}

@@ -33,15 +33,37 @@ function ManageOfficers() {
         </h2>
 
         <nav>
-          <Link to="/admin/dashboard">Dashboard</Link>
+          <Link to="/admin/dashboard">
+            Dashboard
+          </Link>
 
-          <Link to="/admin/users">Users</Link>
+          <Link to="/admin/users">
+            Users
+          </Link>
 
           <Link to="/admin/officers" className="active-menu">
             Officers
           </Link>
 
-          <Link to="/admin/departments">Departments</Link>
+          <Link to="/admin/departments">
+            Departments
+          </Link>
+
+          <Link to="/admin/districts">
+            Districts
+          </Link>
+
+          <Link to="/admin/mandals">
+            Mandals
+          </Link>
+
+          <Link to="/admin/categories">
+            Categories
+          </Link>
+
+          <Link to="/admin/complaints">
+            Complaints
+          </Link>
         </nav>
 
         <Link className="logout-link" to="/">
@@ -79,9 +101,13 @@ function ManageOfficers() {
                 {officers.map((officer) => (
                   <tr key={officer.id}>
                     <td>{officer.id}</td>
+
                     <td>{officer.name}</td>
+
                     <td>{officer.department}</td>
+
                     <td>{officer.mandal}</td>
+
                     <td>
                       <span className="admin-status active">
                         {officer.status}

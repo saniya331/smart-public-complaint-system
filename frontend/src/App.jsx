@@ -22,6 +22,8 @@ import ManageDepartments from "./pages/admin/ManageDepartments";
 import ManageDistricts from "./pages/admin/ManageDistricts";
 import ManageMandals from "./pages/admin/ManageMandals";
 import ManageCategories from "./pages/admin/ManageCategories";
+import ManageComplaints from "./pages/admin/ManageComplaints";
+import AdminComplaintDetails from "./pages/admin/AdminComplaintDetails";
 
 function App() {
   return (
@@ -115,6 +117,11 @@ function App() {
 <Route
   path="/admin/categories"
   element={<ManageCategories />}
+/>
+<Route path="/admin/complaints" element={<ManageComplaints />} />
+<Route
+  path="/admin/complaints/:id"
+  element={<AdminComplaintDetails />}
 />
           </Routes>
         </BrowserRouter>
