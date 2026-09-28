@@ -20,6 +20,9 @@ E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\dto\
 E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\dto\LoginResponse.java
 E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\dto\RegisterRequest.java
 E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\dto\StatusUpdateRequest.java
+E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\entity\Complaint.java
+E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\entity\ComplaintPriority.java
+E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\entity\ComplaintStatus.java
 E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\entity\Role.java
 E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\entity\User.java
 E:\Smart-Public-Complaint-System\backend\src\main\java\com\saniya\complaint\exception\GlobalExceptionHandler.java

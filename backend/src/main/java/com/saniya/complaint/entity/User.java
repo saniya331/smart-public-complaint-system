@@ -2,6 +2,7 @@ package com.saniya.complaint.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "users")
@@ -17,8 +18,10 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private String password;
+    
+    @JsonIgnore
+@Column(nullable = false)
+private String password;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
