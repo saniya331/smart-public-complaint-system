@@ -1,6 +1,8 @@
 package com.saniya.complaint.controller;
 
 import com.saniya.complaint.entity.Complaint;
+import com.saniya.complaint.entity.ComplaintStatus;
+import com.saniya.complaint.entity.Role;
 import com.saniya.complaint.entity.User;
 import com.saniya.complaint.service.ComplaintService;
 import com.saniya.complaint.service.UserService;
@@ -74,5 +76,83 @@ public class ComplaintController {
                 complaintService
                         .getComplaintsByCitizen(citizen)
         );
+    }
+
+    @GetMapping("/assigned")
+    public ResponseEntity<?> getAssignedComplaints(
+            Authentication authentication) {
+
+        User officer = (User) authentication.getPrincipal();
+
+        if (officer.getRole() != Role.OFFICER) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Only officers can access assigned complaints");
+        }
+
+        return ResponseEntity.ok(
+                complaintService
+                        .getComplaintsByOfficer(officer)
+        );
+    }
+
+    @PutMapping("/{id}/assign")
+    public ResponseEntity<?> assignComplaint(
+            @PathVariable Long id,
+            @RequestParam Long officerId) {
+
+        try {
+            User officer = getOfficer(officerId);
+
+            Complaint updatedComplaint =
+                    complaintService.assignComplaint(
+                            id,
+                            officer
+                    );
+
+            return ResponseEntity.ok(updatedComplaint);
+
+        } catch (RuntimeException e) {
+
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateStatus(
+            @PathVariable Long id,
+            @RequestParam ComplaintStatus status) {
+
+        try {
+            Complaint updatedComplaint =
+                    complaintService.updateStatus(
+                            id,
+                            status
+                    );
+
+            return ResponseEntity.ok(updatedComplaint);
+
+        } catch (RuntimeException e) {
+
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
+    private User getOfficer(Long officerId) {
+
+        User officer = userService.getUserById(officerId);
+
+        if (officer.getRole() != Role.OFFICER) {
+
+            throw new RuntimeException(
+                    "Selected user is not an officer"
+            );
+        }
+
+        return officer;
     }
 }

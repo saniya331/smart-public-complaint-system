@@ -3,6 +3,7 @@ package com.saniya.complaint.config;
 import com.saniya.complaint.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
@@ -32,13 +33,11 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
-                        // Authentication APIs
                         .requestMatchers(
                                 "/api/auth/register",
                                 "/api/auth/login"
                         ).permitAll()
 
-                        // Role-based test endpoints
                         .requestMatchers("/api/test/citizen")
                         .hasRole("CITIZEN")
 
@@ -48,7 +47,30 @@ public class SecurityConfig {
                         .requestMatchers("/api/test/admin")
                         .hasRole("ADMIN")
 
-                        // Everything else requires login
+                        .requestMatchers(HttpMethod.POST, "/api/complaints")
+                        .hasRole("CITIZEN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/complaints/my")
+                        .hasRole("CITIZEN")
+
+                        .requestMatchers(
+                                HttpMethod.PUT,
+                                "/api/complaints/*/assign"
+                        )
+                        .hasAnyRole("OFFICER", "ADMIN")
+
+                        .requestMatchers(
+                                HttpMethod.PUT,
+                                "/api/complaints/*/status"
+                        )
+                        .hasAnyRole("OFFICER", "ADMIN")
+
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/complaints/assigned"
+                        )
+                        .hasRole("OFFICER")
+
                         .anyRequest().authenticated()
                 )
 

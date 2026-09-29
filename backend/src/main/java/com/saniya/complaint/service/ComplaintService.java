@@ -66,6 +66,35 @@ public class ComplaintService {
                 .findByAssignedOfficer(officer);
     }
 
+    public Complaint assignComplaint(
+            Long complaintId,
+            User officer) {
+
+        Complaint complaint = complaintRepository
+                .findById(complaintId)
+                .orElseThrow(() ->
+                        new RuntimeException("Complaint not found"));
+
+        complaint.setAssignedOfficer(officer);
+        complaint.setStatus(ComplaintStatus.ASSIGNED);
+
+        return complaintRepository.save(complaint);
+    }
+
+    public Complaint updateStatus(
+            Long complaintId,
+            ComplaintStatus status) {
+
+        Complaint complaint = complaintRepository
+                .findById(complaintId)
+                .orElseThrow(() ->
+                        new RuntimeException("Complaint not found"));
+
+        complaint.setStatus(status);
+
+        return complaintRepository.save(complaint);
+    }
+
     public Complaint updateComplaint(
             Complaint complaint) {
 

@@ -2,8 +2,8 @@ package com.saniya.complaint.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "users")
 public class User {
@@ -19,7 +19,7 @@ public class User {
     private String email;
 
     
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 @Column(nullable = false)
 private String password;
 

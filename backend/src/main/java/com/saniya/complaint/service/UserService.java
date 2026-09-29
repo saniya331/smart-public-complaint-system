@@ -1,4 +1,3 @@
-
 package com.saniya.complaint.service;
 
 import com.saniya.complaint.entity.User;
@@ -16,6 +15,7 @@ public class UserService {
 
     public UserService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder) {
+
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -26,20 +26,39 @@ public class UserService {
             throw new RuntimeException("Email already registered");
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(
+                passwordEncoder.encode(user.getPassword())
+        );
 
         return userRepository.save(user);
     }
 
     public Optional<User> findByEmail(String email) {
+
         return userRepository.findByEmail(email);
     }
 
     public Optional<User> findById(Long id) {
+
         return userRepository.findById(id);
     }
 
-    public boolean checkPassword(String rawPassword, String encodedPassword) {
-        return passwordEncoder.matches(rawPassword, encodedPassword);
+    public User getUserById(Long id) {
+
+        return userRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found")
+                );
+    }
+
+    public boolean checkPassword(
+            String rawPassword,
+            String encodedPassword) {
+
+        return passwordEncoder.matches(
+                rawPassword,
+                encodedPassword
+        );
     }
 }
