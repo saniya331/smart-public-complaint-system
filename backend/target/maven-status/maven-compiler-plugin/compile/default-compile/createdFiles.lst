@@ -4,6 +4,7 @@ com\saniya\complaint\service\UserService.class
 dto\ComplaintResponse.class
 com\saniya\complaint\dto\LoginResponse.class
 repository\DepartmentRepository.class
+com\saniya\complaint\service\ComplaintEvidenceService.class
 controller\CategoryController.class
 controller\FeedbackController.class
 service\AdminService.class
@@ -18,6 +19,7 @@ com\saniya\complaint\service\ComplaintService.class
 service\FeedbackService.class
 com\saniya\complaint\entity\ComplaintPriority.class
 com\saniya\complaint\repository\ComplaintRepository.class
+com\saniya\complaint\controller\ComplaintEvidenceController.class
 repository\MandalRepository.class
 com\saniya\complaint\controller\TestController.class
 dto\StatusUpdateRequest.class
@@ -37,6 +39,7 @@ com\saniya\complaint\security\JwtAuthenticationFilter.class
 com\saniya\complaint\controller\ComplaintController.class
 config\JwtConfig.class
 service\OfficerService.class
+com\saniya\complaint\entity\ComplaintEvidence.class
 dto\ComplaintRequest.class
 security\CustomUserDetailsService.class
 com\saniya\complaint\entity\ComplaintStatus.class
@@ -46,6 +49,7 @@ repository\FeedbackRepository.class
 repository\CategoryRepository.class
 service\AssignmentService.class
 service\NotificationService.class
+com\saniya\complaint\repository\ComplaintEvidenceRepository.class
 controller\DistrictController.class
 controller\OfficerController.class
 exception\ResourceNotFoundException.class
