@@ -34,9 +34,15 @@ public class ComplaintController {
             @RequestBody Complaint complaint,
             Authentication authentication) {
 
-        User citizen = (User) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
 
-        complaint.setCitizen(citizen);
+        if (user.getRole() != Role.CITIZEN) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Only citizens can create complaints");
+        }
+
+        complaint.setCitizen(user);
 
         Complaint savedComplaint =
                 complaintService.createComplaint(complaint);
@@ -47,7 +53,16 @@ public class ComplaintController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Complaint>> getAllComplaints() {
+    public ResponseEntity<?> getAllComplaints(
+            Authentication authentication) {
+
+        User user = (User) authentication.getPrincipal();
+
+        if (user.getRole() != Role.ADMIN) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Only admins can view all complaints");
+        }
 
         return ResponseEntity.ok(
                 complaintService.getAllComplaints()
@@ -56,25 +71,77 @@ public class ComplaintController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getComplaintById(
-            @PathVariable Long id) {
+            @PathVariable Long id,
+            Authentication authentication) {
 
-        return complaintService
-                .getComplaintById(id)
-                .map(ResponseEntity::ok)
-                .orElseGet(() ->
-                        ResponseEntity.notFound().build()
-                );
+        User user = (User) authentication.getPrincipal();
+
+        var complaintOptional =
+                complaintService.getComplaintById(id);
+
+        if (complaintOptional.isEmpty()) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("Complaint not found");
+        }
+
+        Complaint complaint = complaintOptional.get();
+
+        if (user.getRole() == Role.ADMIN) {
+
+            return ResponseEntity.ok(complaint);
+        }
+
+        if (user.getRole() == Role.CITIZEN) {
+
+            if (complaint.getCitizen() == null
+                    || !complaint.getCitizen()
+                    .getId()
+                    .equals(user.getId())) {
+
+                return ResponseEntity
+                        .status(HttpStatus.FORBIDDEN)
+                        .body("You can view only your own complaints");
+            }
+
+            return ResponseEntity.ok(complaint);
+        }
+
+        if (user.getRole() == Role.OFFICER) {
+
+            if (complaint.getAssignedOfficer() == null
+                    || !complaint.getAssignedOfficer()
+                    .getId()
+                    .equals(user.getId())) {
+
+                return ResponseEntity
+                        .status(HttpStatus.FORBIDDEN)
+                        .body("You can view only complaints assigned to you");
+            }
+
+            return ResponseEntity.ok(complaint);
+        }
+
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body("Access denied");
     }
 
     @GetMapping("/my")
     public ResponseEntity<?> getMyComplaints(
             Authentication authentication) {
 
-        User citizen = (User) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
+
+        if (user.getRole() != Role.CITIZEN) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Only citizens can access their complaints");
+        }
 
         return ResponseEntity.ok(
                 complaintService
-                        .getComplaintsByCitizen(citizen)
+                        .getComplaintsByCitizen(user)
         );
     }
 
@@ -99,9 +166,20 @@ public class ComplaintController {
     @PutMapping("/{id}/assign")
     public ResponseEntity<?> assignComplaint(
             @PathVariable Long id,
-            @RequestParam Long officerId) {
+            @RequestParam Long officerId,
+            Authentication authentication) {
+
+        User currentUser =
+                (User) authentication.getPrincipal();
+
+        if (currentUser.getRole() != Role.ADMIN) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Only admins can assign complaints");
+        }
 
         try {
+
             User officer = getOfficer(officerId);
 
             Complaint updatedComplaint =
@@ -123,16 +201,59 @@ public class ComplaintController {
     @PutMapping("/{id}/status")
     public ResponseEntity<?> updateStatus(
             @PathVariable Long id,
-            @RequestParam ComplaintStatus status) {
+            @RequestParam ComplaintStatus status,
+            Authentication authentication) {
+
+        User currentUser =
+                (User) authentication.getPrincipal();
 
         try {
-            Complaint updatedComplaint =
-                    complaintService.updateStatus(
-                            id,
-                            status
-                    );
 
-            return ResponseEntity.ok(updatedComplaint);
+            Complaint complaint =
+                    complaintService
+                            .getComplaintById(id)
+                            .orElseThrow(() ->
+                                    new RuntimeException(
+                                            "Complaint not found"
+                                    )
+                            );
+
+            if (currentUser.getRole() == Role.ADMIN) {
+
+                Complaint updatedComplaint =
+                        complaintService.updateStatus(
+                                id,
+                                status
+                        );
+
+                return ResponseEntity.ok(updatedComplaint);
+            }
+
+            if (currentUser.getRole() == Role.OFFICER) {
+
+                if (complaint.getAssignedOfficer() == null
+                        || !complaint
+                        .getAssignedOfficer()
+                        .getId()
+                        .equals(currentUser.getId())) {
+
+                    return ResponseEntity
+                            .status(HttpStatus.FORBIDDEN)
+                            .body("You can update only complaints assigned to you");
+                }
+
+                Complaint updatedComplaint =
+                        complaintService.updateStatus(
+                                id,
+                                status
+                        );
+
+                return ResponseEntity.ok(updatedComplaint);
+            }
+
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Only officers and admins can update complaint status");
 
         } catch (RuntimeException e) {
 
@@ -144,7 +265,8 @@ public class ComplaintController {
 
     private User getOfficer(Long officerId) {
 
-        User officer = userService.getUserById(officerId);
+        User officer =
+                userService.getUserById(officerId);
 
         if (officer.getRole() != Role.OFFICER) {
 
