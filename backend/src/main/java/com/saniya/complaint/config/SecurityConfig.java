@@ -57,7 +57,7 @@ public class SecurityConfig {
                                 HttpMethod.PUT,
                                 "/api/complaints/*/assign"
                         )
-                        .hasAnyRole("OFFICER", "ADMIN")
+                        .hasRole("ADMIN")
 
                         .requestMatchers(
                                 HttpMethod.PUT,

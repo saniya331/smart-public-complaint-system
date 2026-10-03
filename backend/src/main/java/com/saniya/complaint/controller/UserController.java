@@ -2,6 +2,7 @@ package com.saniya.complaint.controller;
 
 import com.saniya.complaint.dto.LoginRequest;
 import com.saniya.complaint.dto.LoginResponse;
+import com.saniya.complaint.entity.Role;
 import com.saniya.complaint.entity.User;
 import com.saniya.complaint.security.JwtService;
 import com.saniya.complaint.service.UserService;
@@ -17,18 +18,26 @@ public class UserController {
     private final UserService userService;
     private final JwtService jwtService;
 
-    public UserController(UserService userService,
-                          JwtService jwtService) {
+    public UserController(
+            UserService userService,
+            JwtService jwtService) {
+
         this.userService = userService;
         this.jwtService = jwtService;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
+    public ResponseEntity<?> register(
+            @RequestBody User user) {
 
         try {
 
-            User registeredUser = userService.registerUser(user);
+            // Public registration is always for citizens.
+            // Users cannot register themselves as ADMIN or OFFICER.
+            user.setRole(Role.CITIZEN);
+
+            User registeredUser =
+                    userService.registerUser(user);
 
             return ResponseEntity
                     .status(HttpStatus.CREATED)
@@ -49,7 +58,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(
+            @RequestBody LoginRequest request) {
 
         User user = userService
                 .findByEmail(request.getEmail())
@@ -75,15 +85,17 @@ public class UserController {
                     .body("Invalid email or password");
         }
 
-        String token = jwtService.generateToken(user);
+        String token =
+                jwtService.generateToken(user);
 
-        LoginResponse response = new LoginResponse(
-                token,
-                user.getId(),
-                user.getFullName(),
-                user.getEmail(),
-                user.getRole().name()
-        );
+        LoginResponse response =
+                new LoginResponse(
+                        token,
+                        user.getId(),
+                        user.getFullName(),
+                        user.getEmail(),
+                        user.getRole().name()
+                );
 
         return ResponseEntity.ok(response);
     }
