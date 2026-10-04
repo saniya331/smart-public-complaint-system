@@ -1,8 +1,86 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext";
+import api from "../../api/api";
 
 function Register() {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    setFormData((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    setError("");
+    setSuccess("");
+
+    if (!formData.fullName.trim()) {
+      setError("Please enter your full name.");
+      return;
+    }
+
+    if (!formData.email.trim()) {
+      setError("Please enter your email.");
+      return;
+    }
+
+    if (!formData.password) {
+      setError("Please enter a password.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      await api.post("/auth/register", {
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        password: formData.password,
+      });
+
+      setSuccess("Account created successfully. Redirecting to login...");
+
+      setFormData({
+        fullName: "",
+        email: "",
+        password: "",
+      });
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1200);
+    } catch (err) {
+      const message =
+        err.response?.data ||
+        "Registration failed. Please try again.";
+
+      setError(
+        typeof message === "string"
+          ? message
+          : "Registration failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <main className="auth-page">
@@ -19,7 +97,7 @@ function Register() {
       </section>
 
       <section className="auth-form-section">
-        <form className="auth-form">
+        <form className="auth-form" onSubmit={handleSubmit}>
           <Link className="back-link" to="/">
             ← {t("backToHome")}
           </Link>
@@ -27,15 +105,33 @@ function Register() {
           <h2>{t("createAccount")}</h2>
           <p>{t("registerReportTrack")}</p>
 
+          {error && (
+            <p className="form-error">
+              {error}
+            </p>
+          )}
+
+          {success && (
+            <p className="form-success">
+              {success}
+            </p>
+          )}
+
           <label>{t("fullName")}</label>
           <input
             type="text"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
             placeholder={t("fullNamePlaceholder")}
           />
 
           <label>{t("emailAddress")}</label>
           <input
             type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
             placeholder={t("emailPlaceholder")}
           />
 
@@ -48,14 +144,18 @@ function Register() {
           <label>{t("password")}</label>
           <input
             type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
             placeholder={t("createPasswordPlaceholder")}
           />
 
           <button
-            type="button"
+            type="submit"
             className="primary-btn full-btn"
+            disabled={loading}
           >
-            {t("createAccount")}
+            {loading ? "Creating account..." : t("createAccount")}
           </button>
 
           <p className="switch-page">

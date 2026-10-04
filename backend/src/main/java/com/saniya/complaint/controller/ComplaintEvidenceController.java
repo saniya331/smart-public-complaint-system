@@ -27,8 +27,7 @@ public class ComplaintEvidenceController {
     private final ComplaintEvidenceService evidenceService;
     private final ComplaintService complaintService;
 
-    private final Path uploadDirectory =
-            Paths.get("uploads");
+    private final Path uploadDirectory = Paths.get("uploads");
 
     public ComplaintEvidenceController(
             ComplaintEvidenceService evidenceService,
@@ -57,12 +56,16 @@ public class ComplaintEvidenceController {
 
         Complaint complaint = complaintOptional.get();
 
-        // ADMIN can upload evidence for any complaint
+        /*
+         * ADMIN can upload evidence for any complaint.
+         */
         if (user.getRole() == Role.ADMIN) {
-            // allowed
+            // Allowed
         }
 
-        // OFFICER can upload only for assigned complaints
+        /*
+         * OFFICER can upload evidence only for assigned complaints.
+         */
         else if (user.getRole() == Role.OFFICER) {
 
             if (complaint.getAssignedOfficer() == null
@@ -72,15 +75,34 @@ public class ComplaintEvidenceController {
 
                 return ResponseEntity
                         .status(HttpStatus.FORBIDDEN)
-                        .body("You can upload evidence only for complaints assigned to you");
+                        .body(
+                                "You can upload evidence only for complaints assigned to you"
+                        );
             }
         }
 
-        // CITIZEN cannot upload resolution evidence
+        /*
+         * CITIZEN can upload evidence only for their own complaint.
+         */
+        else if (user.getRole() == Role.CITIZEN) {
+
+            if (complaint.getCitizen() == null
+                    || !complaint.getCitizen()
+                    .getId()
+                    .equals(user.getId())) {
+
+                return ResponseEntity
+                        .status(HttpStatus.FORBIDDEN)
+                        .body(
+                                "You can upload evidence only for your own complaints"
+                        );
+            }
+        }
+
         else {
             return ResponseEntity
                     .status(HttpStatus.FORBIDDEN)
-                    .body("Only officers and admins can upload evidence");
+                    .body("Access denied");
         }
 
         try {
@@ -89,6 +111,29 @@ public class ComplaintEvidenceController {
                 return ResponseEntity
                         .badRequest()
                         .body("Please select a file");
+            }
+
+            /*
+             * Allow only JPG and PNG images.
+             */
+            String contentType = file.getContentType();
+
+            if (!"image/jpeg".equals(contentType)
+                    && !"image/png".equals(contentType)) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body("Only JPG and PNG images are allowed");
+            }
+
+            /*
+             * Maximum file size: 10 MB.
+             */
+            if (file.getSize() > 10 * 1024 * 1024) {
+
+                return ResponseEntity
+                        .badRequest()
+                        .body("Image size must not exceed 10 MB");
             }
 
             Files.createDirectories(uploadDirectory);
@@ -101,10 +146,9 @@ public class ComplaintEvidenceController {
             if (originalFileName != null
                     && originalFileName.contains(".")) {
 
-                extension =
-                        originalFileName.substring(
-                                originalFileName.lastIndexOf(".")
-                        );
+                extension = originalFileName.substring(
+                        originalFileName.lastIndexOf(".")
+                );
             }
 
             String storedFileName =
@@ -123,10 +167,8 @@ public class ComplaintEvidenceController {
 
             evidence.setComplaintId(complaintId);
             evidence.setFileName(originalFileName);
-            evidence.setFileType(file.getContentType());
-            evidence.setFilePath(
-                    filePath.toString()
-            );
+            evidence.setFileType(contentType);
+            evidence.setFilePath(filePath.toString());
 
             ComplaintEvidence savedEvidence =
                     evidenceService.saveEvidence(evidence);
@@ -161,12 +203,16 @@ public class ComplaintEvidenceController {
 
         Complaint complaint = complaintOptional.get();
 
-        // ADMIN can view all evidence
+        /*
+         * ADMIN can view all evidence.
+         */
         if (user.getRole() == Role.ADMIN) {
-            // allowed
+            // Allowed
         }
 
-        // OFFICER can view assigned complaint evidence
+        /*
+         * OFFICER can view evidence only for assigned complaints.
+         */
         else if (user.getRole() == Role.OFFICER) {
 
             if (complaint.getAssignedOfficer() == null
@@ -176,11 +222,15 @@ public class ComplaintEvidenceController {
 
                 return ResponseEntity
                         .status(HttpStatus.FORBIDDEN)
-                        .body("You can view evidence only for complaints assigned to you");
+                        .body(
+                                "You can view evidence only for complaints assigned to you"
+                        );
             }
         }
 
-        // CITIZEN can view evidence only for own complaint
+        /*
+         * CITIZEN can view evidence only for their own complaints.
+         */
         else if (user.getRole() == Role.CITIZEN) {
 
             if (complaint.getCitizen() == null
@@ -190,8 +240,16 @@ public class ComplaintEvidenceController {
 
                 return ResponseEntity
                         .status(HttpStatus.FORBIDDEN)
-                        .body("You can view evidence only for your own complaints");
+                        .body(
+                                "You can view evidence only for your own complaints"
+                        );
             }
+        }
+
+        else {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Access denied");
         }
 
         return ResponseEntity.ok(

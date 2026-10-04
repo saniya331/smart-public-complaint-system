@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useComplaints from "../../hooks/useComplaints";
 import { useLanguage } from "../../context/LanguageContext";
+import api from "../../api/api";
 
 function SubmitComplaint() {
   const navigate = useNavigate();
-  const { addComplaint } = useComplaints();
   const { t } = useLanguage();
 
   const [selectedFile, setSelectedFile] = useState(null);
@@ -53,9 +52,8 @@ function SubmitComplaint() {
     }
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-
     setError("");
 
     if (!selectedFile) {
@@ -63,196 +61,214 @@ function SubmitComplaint() {
       return;
     }
 
-    setIsSubmitting(true);
-
     const formData = new FormData(event.currentTarget);
 
-    const newComplaint = addComplaint({
-      category: formData.get("category"),
+    const complaintData = {
       title: formData.get("title"),
+      description: formData.get("description"),
+      category: formData.get("category"),
       district: formData.get("district"),
       mandal: formData.get("mandal"),
-      description: formData.get("description"),
-      landmark: formData.get("landmark"),
-    });
+      locality: formData.get("landmark"),
+    };
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    if (!complaintData.title?.trim()) {
+      setError("Please enter a complaint title.");
+      return;
+    }
 
+    if (!complaintData.description?.trim()) {
+      setError("Please enter a complaint description.");
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      // Step 1: Create complaint
+      const complaintResponse = await api.post(
+        "/complaints",
+        complaintData
+      );
+
+      const savedComplaint = complaintResponse.data;
+
+      // Step 2: Upload evidence image
+      const evidenceFormData = new FormData();
+      evidenceFormData.append("file", selectedFile);
+
+      await api.post(
+        `/complaints/${savedComplaint.id}/evidence`,
+        evidenceFormData
+      );
+
+      // Step 3: Show success
       alert(
-        `${t("complaintSubmittedSuccess")}\n\n${t(
-          "complaintId"
-        )}: ${newComplaint.id}`
+        `${t("complaintSubmittedSuccess")}\n\n` +
+        `${t("complaintId")}: ${savedComplaint.complaintNumber}`
       );
 
       navigate("/citizen/complaints");
-    }, 500);
+    } catch (err) {
+      console.error("Complaint submission error:", err);
+
+      const message =
+        err.response?.data ||
+        "Failed to submit complaint. Please try again.";
+
+      setError(
+        typeof message === "string"
+          ? message
+          : "Failed to submit complaint. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
-    <main className="submit-page">
-      <header className="submit-header">
-        <p>
-          {t("citizenPortal")} / {t("myComplaints")} /{" "}
-          {t("newComplaint")}
-        </p>
-
-        <h1>{t("raiseAComplaint")}</h1>
-
-        <span>{t("submitDescription")}</span>
-      </header>
-
-      <form className="complaint-form" onSubmit={handleSubmit}>
-        {error && <div className="form-error">{error}</div>}
-
-        <section className="form-section">
-          <h2>{t("whatIsTheIssue")}</h2>
-          <p>{t("selectCategoryDescription")}</p>
-
-          <div className="form-grid">
-            <div>
-              <label>{t("complaintCategory")}</label>
-
-              <select name="category" required>
-                <option value="">{t("selectCategory")}</option>
-                <option value="Electricity">{t("electricity")}</option>
-                <option value="Sanitation">{t("sanitation")}</option>
-                <option value="Roads & Transport">
-                  {t("roadsTransport")}
-                </option>
-                <option value="Water Supply">{t("waterSupply")}</option>
-                <option value="Public Safety">{t("publicSafety")}</option>
-              </select>
-            </div>
-
-            <div>
-              <label>{t("issueTitle")}</label>
-
-              <input
-                name="title"
-                type="text"
-                placeholder="Example: Streetlight not working"
-                required
-              />
-            </div>
-          </div>
-
-          <label>{t("describeIssue")}</label>
-
-          <textarea
-            name="description"
-            placeholder={t("descriptionPlaceholder")}
-            required
-          />
-        </section>
-
-        <section className="form-section">
-          <h2>{t("whereIsTheIssue")}</h2>
-          <p>{t("locationDescription")}</p>
-
-          <div className="form-grid">
-            <div>
-              <label>{t("district")}</label>
-
-              <select name="district" required>
-                <option value="">{t("selectDistrict")}</option>
-                <option value="Hyderabad">Hyderabad</option>
-                <option value="Rangareddy">Rangareddy</option>
-                <option value="Medchal-Malkajgiri">
-                  Medchal-Malkajgiri
-                </option>
-              </select>
-            </div>
-
-            <div>
-              <label>{t("mandalLocality")}</label>
-
-              <select name="mandal" required>
-                <option value="">{t("selectLocality")}</option>
-                <option value="Miyapur">Miyapur</option>
-                <option value="Gachibowli">Gachibowli</option>
-                <option value="Kukatpally">Kukatpally</option>
-              </select>
-            </div>
-          </div>
-
-          <label>{t("exactLocation")}</label>
-
-          <input
-            name="landmark"
-            type="text"
-            placeholder={t("landmarkPlaceholder")}
-            required
-          />
-        </section>
-
-        <section className="form-section">
-          <h2>
-            {t("uploadEvidence")}{" "}
-            <small>({t("required")})</small>
-          </h2>
-
-          <p>{t("evidenceDescription")}</p>
-
-          {!selectedFile ? (
-            <label className="upload-box">
-              <input
-                id="evidence-image"
-                type="file"
-                accept="image/png, image/jpeg"
-                onChange={handleFileChange}
-              />
-
-              <strong>{t("uploadImage")}</strong>
-              <span>{t("imageFormat")}</span>
-            </label>
-          ) : (
-            <div className="image-preview-container">
-              <img
-                src={previewUrl}
-                alt={t("evidencePreview")}
-                className="evidence-preview"
-              />
-
-              <div className="selected-file-info">
-                <strong>{selectedFile.name}</strong>
-
-                <span>
-                  {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB
-                </span>
-              </div>
-
-              <button
-                type="button"
-                className="remove-image-btn"
-                onClick={removeImage}
-              >
-                {t("removeImage")}
-              </button>
-            </div>
-          )}
-        </section>
-
-        <div className="form-actions">
-          <button
-            type="button"
-            className="secondary-btn"
-            onClick={() => navigate("/citizen/dashboard")}
-          >
-            {t("cancel")}
-          </button>
-
-          <button
-            type="submit"
-            className="primary-btn"
-            disabled={isSubmitting}
-          >
-            {isSubmitting
-              ? t("submitting")
-              : t("submitComplaint")}
-          </button>
+    <main className="page-container">
+      <section className="form-page">
+        <div className="page-header">
+          <h1>{t("submitComplaint")}</h1>
+          <p>{t("raiseComplaintHelp")}</p>
         </div>
-      </form>
+
+        <form onSubmit={handleSubmit} className="complaint-form">
+
+          {error && (
+            <p className="form-error">
+              {error}
+            </p>
+          )}
+
+          <div className="form-group">
+            <label>{t("category")}</label>
+
+            <select name="category" required>
+              <option value="">Select Category</option>
+              <option value="Electricity">Electricity</option>
+              <option value="Sanitation">Sanitation</option>
+              <option value="Roads & Transport">
+                Roads & Transport
+              </option>
+              <option value="Water Supply">Water Supply</option>
+              <option value="Public Safety">Public Safety</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>{t("complaintTitle")}</label>
+
+            <input
+              type="text"
+              name="title"
+              placeholder="Enter complaint title"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>{t("description")}</label>
+
+            <textarea
+              name="description"
+              rows="6"
+              placeholder="Describe your complaint"
+              required
+            ></textarea>
+          </div>
+
+          <div className="form-group">
+            <label>{t("district")}</label>
+
+            <select name="district" required>
+              <option value="">Select District</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Rangareddy">Rangareddy</option>
+              <option value="Medchal-Malkajgiri">
+                Medchal-Malkajgiri
+              </option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>{t("mandal")}</label>
+
+            <select name="mandal" required>
+              <option value="">Select Mandal / Locality</option>
+              <option value="Miyapur">Miyapur</option>
+              <option value="Gachibowli">Gachibowli</option>
+              <option value="Kukatpally">Kukatpally</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>Exact Location / Landmark</label>
+
+            <input
+              type="text"
+              name="landmark"
+              placeholder="Enter exact location or landmark"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>
+              Complaint Evidence
+              <span> (JPG/PNG, maximum 10 MB)</span>
+            </label>
+
+            <input
+              id="evidence-image"
+              type="file"
+              accept="image/jpeg,image/png"
+              onChange={handleFileChange}
+              required
+            />
+
+            {previewUrl && (
+              <div className="image-preview">
+                <img
+                  src={previewUrl}
+                  alt="Complaint evidence preview"
+                />
+
+                <button
+                  type="button"
+                  onClick={removeImage}
+                  className="secondary-btn"
+                >
+                  Remove Image
+                </button>
+              </div>
+            )}
+          </div>
+
+          <div className="form-actions">
+            <button
+              type="button"
+              className="secondary-btn"
+              onClick={() => navigate("/citizen/dashboard")}
+              disabled={isSubmitting}
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              className="primary-btn"
+              disabled={isSubmitting}
+            >
+              {isSubmitting
+                ? "Submitting..."
+                : t("submitComplaint")}
+            </button>
+          </div>
+
+        </form>
+      </section>
     </main>
   );
 }
